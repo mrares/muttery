@@ -1,0 +1,112 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    {% stylesheets
+        'bundles/webicksmuttery/css/responsive-style.css'
+        'bundles/webicksmuttery/css/style.css'
+        filter='cssrewrite'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{# this has been disabled until further notice
+    {% block stylesheets %}
+        <link rel='stylesheet' id='responsive-style-css'  href='{{ asset('css/style.css') }}' type='text/css' media='all' />
+    {% endblock %}
+#}
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="page page-id-1484 page-template page-template-responsive-theme-php">
+    <div id="container" class="hfeed">
+        <div id="header">
+            <div id="logo">
+                <a href="http://themeid.com/"><img src="http://themeid.com/wp-content/uploads/2012/11/logo.png" width="200" height="51" alt="ThemeID" /></a>
+            </div><!-- end of #logo -->
+			<ul id="menu-tid-main-menu" class="menu"><li id="menu-item-1950" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1950"><a title="Home" href="http://themeid.com/">Home</a></li>
+            <li id="menu-item-1559" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-1559"><a title="Themes" href="#">Themes</a>
+                <ul class="sub-menu">
+                	<li id="menu-item-1560" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1484 current_page_item menu-item-1560"><a title="Responsive Theme" href="http://themeid.com/responsive-theme/">Responsive Theme</a></li>
+                	<li id="menu-item-1562" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1562"><a title="Shell Lite Theme" href="http://themeid.com/shell-lite-theme/">Shell Lite Theme</a></li>
+                	<li id="menu-item-1561" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1561"><a title="Highlander Child Theme" href="http://themeid.com/highlander-child-theme/">Highlander Child Theme</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-1563" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1563"><a title="Documentation" href="#">Documentation</a>
+                <ul class="sub-menu">
+                	<li id="menu-item-1564" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1564"><a title="Responsive Documentation" href="http://themeid.com/forum/forum/12/responsive-documentation/">Responsive Documentation</a></li>
+                	<li id="menu-item-1861" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1861"><a title="Responsive Localization" href="http://themeid.com/forum/topic/915/translation-responsive-theme/">Responsive Localization</a></li>
+                	<li id="menu-item-1988" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1988"><a title="Responsive Grid" href="http://themeid.com/responsive-grid/">Responsive Grid</a></li>
+                	<li id="menu-item-1565" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1565"><a title="Shell Documentation" href="http://themeid.com/forum/forum/9/shell-documentation/">Shell Documentation</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-1584" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1584"><a title="Support " href="http://themeid.com/support/">Support</a>
+                <ul class="sub-menu">
+                	<li id="menu-item-1957" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1957"><a title="Contact" href="http://themeid.com/contact/">Contact</a></li>
+                </ul>
+            </li>
+            <li id="menu-item-1581" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1581"><a title="Donate" href="http://themeid.com/donate/">Donate</a></li>
+            <li id="menu-item-1713" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1713"><a title="Showcase" href="http://themeid.com/showcase/">Showcase</a></li>
+            <li id="menu-item-1862" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1862"><a title="Blog" href="http://themeid.com/blog/">Blog</a></li>
+        </ul>
+    </div><!-- end of #header -->
+    <div id="wrapper" class="clearfix">
+        <div id="content-full" class="grid col-940">
+        {% block body %}{#         Here goes your content!     #}{% endblock %}
+        </div><!-- end of content -->
+    </div><!-- end of #wrapper -->
+</div><!-- end of #container -->
+
+<div id="footer" class="clearfix">
+    <div id="footer-wrapper">
+        <div class="grid col-940">
+            <div class="grid col-540">
+                <ul id="menu-tid-footer-menu" class="footer-menu"><li id="menu-item-1580" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1580"><a title="Donate" href="http://themeid.com/donate/">Donate</a></li>
+                    <li id="menu-item-1569" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1569"><a title="About Us" href="http://themeid.com/about-us/">About Us</a></li>
+                    <li id="menu-item-1567" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1567"><a title="TOS" href="http://themeid.com/tos/">TOS</a></li>
+                    <li id="menu-item-1630" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1630"><a title="License" href="http://themeid.com/license/">License</a></li>
+                    <li id="menu-item-1568" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1568"><a title="Contact Us" href="http://themeid.com/contact/">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="grid col-380 fit">
+                <ul class="social-icons">
+                    <li class="twitter-icon">
+                        <a href="https://twitter.com/emiluzelac">
+                            <img src="http://themeid.com/wp-content/themes/tid/icons/twitter-icon.png" width="24" height="24" alt="Twitter">
+                        </a>
+                    </li>
+                    <li class="linkedin-icon">
+                        <a href="http://www.linkedin.com/in/emiluzelac">
+                            <img src="http://themeid.com/wp-content/themes/tid/icons/linkedin-icon.png" width="24" height="24" alt="LinkedIn">
+                        </a>
+                    </li>
+                    <li class="google-plus-icon">
+                        <a href="https://plus.google.com/u/0/112129109307828347852?rel=author">
+                            <img src="http://themeid.com/wp-content/themes/tid/icons/googleplus-icon.png" width="24" height="24" alt="Google Plus">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="grid col-300 copyright">
+            <a href="http://themeid.com/">
+                <img src="http://themeid.com/wp-content/themes/tid/images/logo-footer.png" class="logo-footer" width="100" height="26" alt="ThemeID" />
+            </a>
+            &copy; 2003 &#8211;2012<a href="http://themeid.com/" title="ThemeID">
+            </a>
+        </div>
+        <div class="grid col-300 scroll-top"><a href="#scroll-top" title="scroll to top">&uarr;</a></div>
+        <div class="grid col-300 fit powered">
+            <a href="http://themeid.com/responsive-theme/" title="Responsive Theme">
+                    Responsive Theme</a>
+            powered by <a href="http://wordpress.org/" title="WordPress">
+                    WordPress</a>
+        </div><!-- end .powered -->
+    </div><!-- end #footer-wrapper -->
+</div><!-- end #footer -->
+</body>
+</html>

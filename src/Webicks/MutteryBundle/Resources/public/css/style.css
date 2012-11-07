@@ -1,0 +1,976 @@
+/*   
+Theme Name: ThemeID
+Theme URI: http://themeid.com/responsive-theme
+Description: Responsive Child Theme
+Author: Emil Uzelac
+Author URI: http://themeid.com
+Template: responsive
+Version: 1.0
+*/
+
+/* Import Responsive Styles */
+/* @import url('../responsive/style.css'); */
+@import url('http://fonts.googleapis.com/css?family=Muli:300,400,300italic,400italic');
+
+/* =Base
+-------------------------------------------------------------- */
+body {
+    background: #fff url(../images/bg.png) repeat-x;
+    color: #222;
+    font-size: 15px;
+    font-family: 'Muli', Verdana, Helvetica, sans-serif;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* =Globals
+-------------------------------------------------------------- */
+@keyframes fade-in {
+    
+    0% {
+        opacity: 0;
+    }
+    
+    60% {
+        opacity: .5;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fade-in {
+    
+    0% {
+        opacity: 0;
+    }
+    
+    60% {
+        opacity: .5;
+    }
+    
+    100% {
+        opacity: 1;
+    }
+}
+
+#container * {
+    -webkit-animation-name: fade-in;
+    -webkit-animation-duration: .3s;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-iteration-count: 1;
+    animation-name: fade-in;
+    animation-duration: .3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
+}
+
+#container {
+	-webkit-border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-border-radius: 0;
+    -moz-box-shadow: none;
+	background: none;
+	border: none;
+	border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 10px;
+    max-width: 1024px;
+}
+
+#wrapper,
+.home #wrapper {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.ie7 #wrapper {
+    width: 101%;
+}
+
+#header {
+    margin: 0 auto;
+}
+
+/* =Logo
+-------------------------------------------------------------- */
+#logo {
+    position: relative;
+    top: 15px;
+}
+
+.ie7 #logo {
+    float: none;
+    text-align: left;
+}
+
+/* =Primary Menu
+-------------------------------------------------------------- */
+.menu {
+    background: none;
+    background-color: none;
+    background-image: none;
+    clear: both;
+    filter: none;
+    float: right;
+    margin: 0 auto;
+    max-width: 1021px;
+    padding: 0;
+    position: relative;
+    top: -15px;
+}
+
+.menu a {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ccc;
+    color: #666666;
+    font-size: 0.7em;
+    font-weight: 400;
+    filter: none;
+    height: auto;
+    line-height: 1;
+    text-shadow: 1px 1px #fff;
+    text-transform: uppercase;
+}
+
+.menu a:hover {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    color: #cd1076;
+    filter: none;
+}
+
+.menu ul  {
+    padding-top: 10px;
+}
+
+.menu ul li a {
+    font-size: 0.7em;
+}
+
+.menu .current_page_item a {
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    filter: none;
+    color: #cd1076;
+}
+
+.home .menu .current_page_item a {
+    background-color: transparent;
+    color: #666666;
+}
+
+/* =Top Menu
+-------------------------------------------------------------- */
+.top-menu {
+    margin-top: 0;
+}
+
+/* =Footer Menu
+-------------------------------------------------------------- */
+.footer-menu li a {
+    border-left: 1px solid #555;
+    text-transform: uppercase;
+}
+
+/* =Author's Box
+-------------------------------------------------------------- */
+#author-meta {
+    margin: 40px 0;
+    padding: 10px;
+}
+
+/* =Links
+-------------------------------------------------------------- */
+a {
+	-webkit-transition: color .6s linear;
+	-moz-transition: color .6s linear;
+	-o-transition: color .6s linear;
+	-ms-transition: color .6s linear;
+    color: #007ca6;
+	transition: color .6s linear;
+}
+
+a:hover {
+    color: #666666;
+}
+
+.breadcrumb-list {
+    color: #111;
+}
+
+button, 
+a.button,
+input[type='reset'], 
+input[type='button'], 
+input[type='submit'] {
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.or-demo {
+    display: block;
+    padding-top: 15px;
+}
+
+.live-demo {
+    display: block;
+}
+
+/* =Buttons
+-------------------------------------------------------------- */
+button, 
+a.button,
+input[type='reset'], 
+input[type='button'], 
+input[type='submit'] {
+	-moz-border-radius: 3px;
+    -moz-box-shadow: 0pt -1px 0pt rgba(0, 0, 0, 0.075) inset, 0pt 1px 0pt rgba(255, 255, 255, 0.3) inset, 0pt 1px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0pt -1px 0pt rgba(0, 0, 0, 0.075) inset, 0pt 1px 0pt rgba(255, 255, 255, 0.3) inset, 0pt 1px 2px rgba(0, 0, 0, 0.1);
+	-webkit-border-radius: 3px;
+	background-color: #cdc9c9; /* Snow 3 */
+	background-image: none;
+    border-radius: 3px;
+	box-shadow: 0pt -1px 0pt rgba(0, 0, 0, 0.075) inset, 0pt 1px 0pt rgba(255, 255, 255, 0.3) inset, 0pt 1px 2px rgba(0, 0, 0, 0.1);
+    filter: none;
+    font-weight: 400;
+}
+
+button:hover, 
+a.button:hover,
+input[type='reset']:hover, 
+input[type='button']:hover, 
+input[type='submit']:hover {
+	background-color: #fff;
+	background-image: none;
+    filter: none;
+}
+
+/* =Buttons (Call to Action)
+-------------------------------------------------------------- */
+.call-to-action {
+	text-align: center;
+}
+
+.call-to-action a.button {
+	font-size: 24px;
+	padding: 15px 35px;
+}
+
+.call-to-action a.button:hover {
+	text-decoration: none;
+}
+
+.ie7 .call-to-action a.button {
+    padding: 11px 35px 14px 35px;
+}
+
+/* =Buttons (Sizes)
+-------------------------------------------------------------- */
+.small a.button {
+	font-size: 10px;
+	padding: 3px 6px;
+}
+
+.medium a.button {
+	font-size: 16px;
+	padding: 8px 16px;
+}
+
+.large a.button {
+	font-size: 18px;
+	padding: 10px 35px;
+}
+
+.xlarge a.button {
+	font-size: 24px;
+	padding: 12px 55px;
+}
+
+/* =Buttons (Colors)
+-------------------------------------------------------------- */
+a.blue {
+	background-color: #1874cd; /* Dodger Blue */
+	background-image: none;
+    filter: none;
+}
+
+a.blue:hover {
+	background-color: #7db7f0;
+	background-image: none;
+    filter: none;
+}
+
+a.red {
+	background-color: #cd0000; /* Red 4 */
+	background-image: none;
+    filter: none;
+}
+
+a.red:hover {
+	background-color: #ff5656;
+	background-image: none;
+    filter: none;
+}
+
+a.orange {
+	background-color: #ff7f00; /* Dark Orange 1 */
+	background-image: none;
+    filter: none;
+}
+
+a.orange:hover {
+	background-color: #ffc388;
+	background-image: none;
+    filter: none;
+}
+
+a.yellow {
+	background-color: #ecca06; /* Yellow Gold */
+	background-image: none;
+    filter: none;
+}
+
+a.yellow:hover {
+	background-color: #fffadd;
+	background-image: none;
+    filter: none;
+}
+
+a.green {
+	background-color: #2e8b57; /* Sea Green 4 */
+	background-image: none;
+    filter: none;
+}
+
+a.green:hover {
+	background-color: #71d09b;
+	background-image: none;
+    filter: none;
+}
+
+a.olive {
+	background-color: #838b83; /* Honey Dew 4 */
+	background-image: none;
+    filter: none;
+}
+
+a.olive:hover {
+	background-color: #c9cdc9;
+	background-image: none;
+    filter: none;
+}
+
+a.purple {
+	background-color: #5d478b; /* Medium Purple 4 */
+	background-image: none;
+    filter: none;
+}
+
+a.purple:hover {
+	background-color: #a492c8;
+	background-image: none;
+    filter: none;
+}
+
+a.pink {
+	-moz-box-shadow: 0 1px 0 #89275c,
+                0 2px 0 #9c2364,
+                0 3px 0 #87295b,
+                0 4px 0 #722c52,
+                0 5px 0 #612e49,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 1px 0 #89275c,
+                0 2px 0 #9c2364,
+                0 3px 0 #87295b,
+                0 4px 0 #722c52,
+                0 5px 0 #612e49,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+	background-color: #cd1076; /* Deep Pink 3 */
+	background-image: none;
+	box-shadow: 0 1px 0 #89275c,
+                0 2px 0 #9c2364,
+                0 3px 0 #87295b,
+                0 4px 0 #722c52,
+                0 5px 0 #612e49,
+                0 6px 1px rgba(0,0,0,.1),
+                0 0 5px rgba(0,0,0,.1),
+                0 1px 3px rgba(0,0,0,.3),
+                0 3px 5px rgba(0,0,0,.2),
+                0 5px 10px rgba(0,0,0,.25),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.15);
+    filter: none;
+}
+
+a.pink:hover {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+	background-color: #f471b8;
+	background-image: none;
+    box-shadow: none;
+    filter: none;
+}
+
+a.brick {
+	background-color: #b22222; /* Fire Brick */
+	background-image: none;
+    filter: none;
+}
+
+a.brick:hover {
+	background-color: #e57777;
+	background-image: none;
+    filter: none;
+}
+
+a.gold {
+	background-color: #8b6508; /* Dark Golden Rod 4 */
+	background-image: none;
+    filter: none;
+}
+
+a.gold:hover {
+	background-color: #f3b828;
+	background-image: none;
+    filter: none;
+}
+
+a.brown {
+	background-color: #8b4513; /* Saddle Brown */
+	background-image: none;
+    filter: none;
+}
+
+a.brown:hover {
+	background-color: #8b4513;
+	background-image: none;
+    filter: none;
+}
+
+a.silver {
+	background-color: #c0c0c0; /* Silver */
+	background-image: none;
+    filter: none;
+}
+
+a.silver:hover {
+	background-color: #fff;
+	background-image: none;
+    filter: none;
+}
+
+a.gray {
+	background-color: #696969; /* Dim Gray */
+	background-image: none;
+    filter: none;
+}
+
+a.gray:hover {
+	background-color: #adadad;
+	background-image: none;
+    filter: none;
+}
+
+a.black {
+	background-color: #080808; /* Black */
+	background-image: none;
+    filter: none;
+}
+
+a.black:hover {
+	background-color: #4c4c4c;
+	background-image: none;
+    filter: none;
+}
+
+.widget-buttons a {
+    padding: 4px 8px !important
+}
+
+.widget-buttons {
+    clear: both;
+    display: block;
+    margin-top: 23px
+}
+
+/* =Featured
+-------------------------------------------------------------- */
+#featured {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    margin: 10px 0;
+    padding: 0;
+    width: 100%;
+}
+
+#featured-image {
+    margin: 0;
+    position: relative;
+    top: 0;
+}
+
+#featured-image .aligncenter {
+    margin-top: 3px;
+}
+
+.call-to-action {
+    margin-top: 22px;
+}
+
+.call-to-action a.button {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+	font-size: 18px;
+}
+
+/* =Headings
+-------------------------------------------------------------- */
+h1 a, 
+h2 a, 
+h3 a, 
+h4 a, 
+h5 a, 
+h6 a {
+    font-weight: 400;
+}
+
+h1 {
+    color: #2b2b2b;
+    font-size: 3.0;
+    font-weight: 400;
+    margin-top: 0;
+}
+
+h1 a {
+    font-weight: 400;
+}
+
+h2 {
+    color: #111;
+    font-size: 1.6em;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3em;
+    padding-bottom: 8px;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+h6 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* =Titles
+-------------------------------------------------------------- */
+.featured-title {
+    color: #2b2b2b;
+    font-weight: 400;
+}
+
+.featured-subtitle {
+    color: #111;
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.post-title {
+}
+
+.page-template-landing-page-php .post-title {
+    padding-top: 10px;
+}
+
+.widget-title,
+.widget-title-home h3 {
+    border-bottom: 2px solid #ddd;
+    font-size: 1.17em;
+    font-weight: 400;
+    height: auto;
+    line-height: normal;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+}
+
+.wp-caption p.wp-caption-text {
+    font-weight: 400;
+    padding-top: 10px
+}
+
+/* =Post
+-------------------------------------------------------------- */
+.post-meta,
+.post-meta a,
+.comments-link,
+.comments-link a {
+    color: #999;
+    font-size: 13px;
+}
+
+/* =Widgets
+-------------------------------------------------------------- */
+#widgets ul,
+#widgets ul li {
+    list-style: none;
+    margin-left: 0;
+}
+
+.widget-wrapper {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+    padding: 20px 0 0 0;
+}
+
+.home .widget-wrapper {
+    padding: 0;
+}
+
+.textwidget {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* =Content
+-------------------------------------------------------------- */
+#content,
+#content-full,
+#content-blog,
+#content-images,
+#content-archive,
+#content-sitemap {
+	padding: 60px 0;
+}
+
+/* =Footer
+-------------------------------------------------------------- */
+#footer {
+    background: #222 url(../images/bg-footer.png) top repeat-x;
+    color: #666666;
+    max-width: 100%;
+    min-height: 167px;
+    text-shadow: none;
+}
+
+#footer a {
+    color: #fff;
+}
+
+#footer a:hover {
+    color: #666666;
+}
+
+#footer-wrapper {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding-top: 25px;
+}
+
+.logo-footer {
+    vertical-align: middle;
+}
+
+/* =Media Print
+    If you're working on a Child Theme, make sure that all
+	media queries are included in your style.css
+-------------------------------------------------------------- */
+@media print {
+
+    h1 {
+	    page-break-before: always;
+    }
+
+    h1,  h2,  h3,  h4,  h5,  h6 {
+	    page-break-after: avoid;
+    }
+
+    ul,  ol,  dl {
+	    page-break-before: avoid;
+    }
+}
+
+/*	Retina (HiDPI) Display
+    http://www.quirksmode.org/blog/archives/2012/06/devicepixelrati.html
+-------------------------------------------------------------- */
+@media 
+    only screen and (-moz-min-device-pixel-ratio:1.5), 
+    only screen and (-o-min-device-pixel-ratio:3/2), 
+    only screen and (-webkit-min-device-pixel-ratio:1.5), 
+    only screen and (min-device-pixel-ratio:1.5) {
+    
+    body {}
+}
+
+/* =Responsive (Mobile) Design
+-------------------------------------------------------------- */
+@media screen and (max-width: 980px) {
+
+    body {}
+	
+    .grid, 
+	.grid-right {
+	    float: none;
+    }
+	
+	#featured-image .fluid-width-video-wrapper {
+	    margin: 20px 0 0 0;
+    }
+	
+	.home #widgets {
+		margin-top: 40px;
+	}
+    
+    .top-widget,
+    .home .top-widget {
+        margin-top: 0 !important;
+    }
+    
+}
+
+@media screen and (max-width: 650px) {
+
+    body {
+        background: #fff;
+    }
+
+    #logo {
+	    float: none;
+        margin: 10px 0;
+	    text-align: center;
+        top: 0;
+    }
+
+    .grid, 
+	.grid-right {
+	    float: none;
+    }
+
+	#featured-image .fluid-width-video-wrapper {
+	    margin: 20px 0 0 0;
+    }
+    
+    .featured-title {
+        padding: 0;
+    }
+    
+    .top-widget {
+        float: none;
+        margin: 0 auto 10px auto;
+        position: relative;
+        text-align: center;
+        width: auto;
+    }
+    
+    .top-widget .widget-title {
+        text-align: center;
+    }
+	
+    .js .menu,
+	.js .sub-header-menu {
+		display: none;
+	}
+	
+	.top-menu, 
+	.footer-menu li {
+	    float: none;
+        font-size: 11px;
+	    text-align: center;
+    }
+	
+	.tinynav { 
+	    display: block;
+		margin: 0 auto;
+		width: 100%;
+	}
+	
+	.tinynav {
+		-moz-appearance: none !important;
+		-webkit-appearance: none !important;
+		appearance: none !important;
+		background: #fff url(../images/bg-select.png) no-repeat right;
+		border: 1px solid #ccc;
+        font-size: 12px;
+		overflow: hidden;
+		padding: 0.5em 1em 0.5em 0.75em;
+	}
+	
+	.ie7 .tinynav,
+	.ie8 .tinynav {
+		padding-right: 10px;
+	}
+	
+	.ie9 .tinynav  {
+		padding-right: 8px;
+	}
+	
+    #footer {
+	    text-align: center;
+    }
+
+    #footer .social-icons {
+        margin-bottom: 10px;
+	    text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    body {}
+
+    #logo {
+	    float: none;
+	    text-align: center;
+    }
+
+    .grid, 
+	.grid-right {
+	    float: none;
+    }
+
+	#featured-image .fluid-width-video-wrapper {
+	    margin: 20px 0 0 0;
+	}
+	
+	.featured-title {
+	    font-size: 40px;
+    }
+    
+    .post-title {
+        font-size: 36px;
+    }
+    
+    .breadcrumb-list,
+    .navigation .next,
+    .navigation .previous {
+        text-align: center;
+    }
+	
+    .menu ul, 
+	.menu li, 
+	.top-menu, 
+	.footer-menu li, 
+	.sub-header-menu li {
+	    float: none;
+	    text-align: center;
+        text-rendering: optimizeSpeed;
+    }
+	
+    #footer {
+	    text-align: center;
+    }
+
+    #footer .social-icons {
+	    text-align: center;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    
+    body {}
+	
+	#featured p {
+	    font-size: 12px;
+		line-height: 1.2em;
+    }
+
+    .featured-title {
+	    font-size: 35px;
+    }
+	
+	.featured-subtitle {
+		font-size: 15px;
+	}
+
+    .call-to-action a.button {
+	    font-size: 14px;
+	    padding: 7px 17px;
+    }
+}
+
+@media screen and (max-width: 240px) {
+    
+    body {}
+	
+	#featured p {
+	    font-size: 11px;
+		line-height: 1.1em;
+    }
+
+    .featured-title {
+	    font-size: 20px;
+    }
+	
+	.featured-subtitle {
+		font-size: 11px;
+	}
+
+    .call-to-action a.button {
+	    font-size: 12px;
+	    padding: 5px 15px;
+    }
+    
+    .top-widget area,
+    .top-widget select,
+    .top-widget textarea,
+    .top-widget input[type="text"], 
+    .top-widget input[type="password"] {
+        width: 75%;
+    }
+    
+    .widget-title,
+    .widget-title-home h3 {
+        font-size: 14px;
+        line-height: 13px;
+        text-align: left;
+    }
+}
+
+/*The last 29 days of the month are the hardest."- Nikola Tesla*/
