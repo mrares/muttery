@@ -74,7 +74,7 @@ body {
 	border: none;
 	border-radius: 0;
     box-shadow: none;
-    margin-bottom: 10px;
+    margin-bottom: 177px;
     max-width: 1024px;
 }
 
@@ -101,7 +101,7 @@ body {
 -------------------------------------------------------------- */
 #logo {
     position: relative;
-    top: 15px;
+    top: 10px;
 }
 
 .ie7 #logo {
@@ -695,9 +695,12 @@ h6 {
 #footer {
     background: #222 url(../images/bg-footer.png) top repeat-x;
     color: #666666;
+    width: 100%;
     max-width: 100%;
     min-height: 167px;
     text-shadow: none;
+	position: fixed;
+	bottom: 0px;
 }
 
 #footer a {

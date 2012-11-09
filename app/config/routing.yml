@@ -7,3 +7,7 @@ webicks_muttery:
     resource: "@WebicksMutteryBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+_assetic:
+    resource: .
+    type:     assetic
