@@ -2,6 +2,7 @@
 
 namespace Webicks\MutteryBundle\Entity;
 
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Webicks\MutteryBundle\Entity\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var integer $id
@@ -19,7 +20,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $name
@@ -27,14 +28,6 @@ class User
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
-
 
     /**
      * Get id
@@ -117,9 +110,11 @@ class User
      */
     public function setFBData($fbdata)
     {
+    	var_dump('=================');
+    	var_dump($fbdata);
     	if (isset($fbdata['id'])) {
     		$this->setFacebookId($fbdata['id']);
-//     		$this->addRole('ROLE_FACEBOOK');
+    		$this->addRole('ROLE_FACEBOOK');
     	}
     	if (isset($fbdata['first_name'])) {
 //     		$this->setFirstname($fbdata['first_name']);

@@ -10,10 +10,11 @@ Welcom!
     <hr />
     <div class="invites pending">
 
-    {% for user in pending %}
+    {% for friend in myFriends %}
 
         <div class="userbox">
-            <div class="username">{{ user }}</div>
+            <div class="username">{{ friend.name }}</div>
+            <div class="picture"><img src="https://graph.facebook.com/{{ friend.id }}/picture?type=large"</div>
         </div>
 
     {% endfor %}
@@ -25,6 +26,7 @@ Welcom!
 <div class="grid col-380 fit">
     <div id="register-box">
 {#         <h2>Log-in!</h2> #}
+        {{ app.user }}
         {{ facebook_login_button({'autologoutlink': true}) }}
          and Start muttering!
 

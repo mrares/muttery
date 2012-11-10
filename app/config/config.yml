@@ -63,7 +63,7 @@ fos_facebook:
       file:   "%kernel.root_dir%/../vendor/facebook/php-sdk/src/base_facebook.php"
       alias:  facebook
       cookie: true
-      permissions: [email, user_birthday]
+      permissions: [email] #, user_birthday, read_friendlists, photo, friends_photos]
 
 fos_user:
   db_driver: orm
