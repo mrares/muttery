@@ -1,5 +1,33 @@
 {% extends "WebicksMutteryBundle::responsive.html.twig" %}
 
+{% block header_message %}
+Welcom!
+{% endblock %}
+
 {% block body %}
-Hello, worlds!
+<div class="grid col-540">
+    <h1>We're waiting for you:</h1>
+    <hr />
+    <div class="invites pending">
+
+    {% for user in pending %}
+
+        <div class="userbox">
+            <div class="username">{{ user }}</div>
+        </div>
+
+    {% endfor %}
+
+
+    </div>
+</div>
+
+<div class="grid col-380 fit">
+    <div id="register-box">
+{#         <h2>Log-in!</h2> #}
+        {{ facebook_login_button({'autologoutlink': true}) }}
+         and Start muttering!
+
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,10 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     db-devel
+    database_port:     3306
+    database_name:     muttery
+
+    mailer_transport:  smtp
+    mailer_host:       localhost
+
+    locale:            en

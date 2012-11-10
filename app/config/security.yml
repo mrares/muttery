@@ -11,6 +11,9 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
+        my_facebook_provider:
+            id: my.facebook.user
+    
         in_memory:
             memory:
                 users:
@@ -18,22 +21,32 @@ security:
                     admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
+        public:
+            # since anonymous is allowed users will not be forced to login
+            pattern:   ^/.*
+            fos_facebook:
+                app_url: "http://apps.facebook.com/appName/"
+                server_url: "http://localhost/facebookApp/"
+            anonymous: true
+            logout:
+                handlers: ["fos_facebook.logout_handler"]
+            
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
 
-        secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            form_login:
+#                check_path: /demo/secured/login_check
+#                login_path: /demo/secured/login
+#            logout:
+#                path:   /demo/secured/logout
+#                target: /demo/
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

@@ -17,7 +17,10 @@
         "sensio/framework-extra-bundle": "2.1.*",
         "sensio/generator-bundle": "2.1.*",
         "jms/security-extra-bundle": "1.2.*",
-        "jms/di-extra-bundle": "1.1.*"
+        "jms/di-extra-bundle": "1.1.*",
+        "facebook/php-sdk": "dev-master",
+        "friendsofsymfony/facebook-bundle": "dev-master",
+        "friendsofsymfony/user-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -11,3 +11,9 @@ webicks_muttery:
 _assetic:
     resource: .
     type:     assetic
+    
+_security_check:
+    pattern:  /login_check
+_security_logout:
+    pattern:  /logout
+    

@@ -1,5 +1,6 @@
 imports:
-    - { resource: /etc/web/parameters.yml }
+    - { resource: parameters.yml }
+    - { resource: /etc/web/muttery_secrets.yml }
     - { resource: security.yml }
 
 framework:
@@ -57,3 +58,14 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_facebook:
+      file:   "%kernel.root_dir%/../vendor/facebook/php-sdk/src/base_facebook.php"
+      alias:  facebook
+      cookie: true
+      permissions: [email, user_birthday]
+
+fos_user:
+  db_driver: orm
+  user_class: Webicks\MutteryBundle\Entity\User
+  firewall_name: public
