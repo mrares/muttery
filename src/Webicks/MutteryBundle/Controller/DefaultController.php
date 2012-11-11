@@ -33,7 +33,7 @@ class DefaultController extends Controller
     	$fb = $this->get('facebook');
     	$fbdata = $fb->api('/me');
     	if(!empty($fbdata)) {
-        	$this->get('my.fb.user')->loadUserByUsername($fbdata['id']);
+        	$this->get('facebook.user')->loadUserByUsername($fbdata['id']);
     	}
     	return $this->redirect('/');
     }

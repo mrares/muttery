@@ -1,25 +1,28 @@
 {% extends "WebicksMutteryBundle::responsive.html.twig" %}
 
 {% block header_message %}
-Welcom!
+Welcome!
 {% endblock %}
 
 {% block body %}
+
+{# Mutter creation overlay box to be displayed on FB login. #}
+<div id="create-mutter">
+    <div>
+    Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!
+    </div>
+</div>
+
 <div class="grid col-540">
     <h1>We're waiting for you:</h1>
     <hr />
     <div class="invites pending">
-
     {% for friend in myFriends %}
-
         <div class="userbox">
             <div class="username">{{ friend.name }}</div>
             <div class="picture"><img src="https://graph.facebook.com/{{ friend.id }}/picture?type=large" /></div>
         </div>
-
     {% endfor %}
-
-
     </div>
 </div>
 
@@ -28,8 +31,9 @@ Welcom!
         {{ facebook_login_button({'autologoutlink': true}) }}
         {% if not app.user %}
          and Start muttering!
+         {% else %}
+         Start muttering!
          {% endif %}
-
     </div>
 </div>
 {% endblock %}

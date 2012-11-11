@@ -26,6 +26,7 @@ class AppKernel extends Kernel
 
         	// This is our bundle
     		new Webicks\MutteryBundle\WebicksMutteryBundle(),
+    		new Webicks\JqueryBundle\WebicksJqueryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

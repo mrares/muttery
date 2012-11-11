@@ -12,7 +12,7 @@ security:
 
     providers:
         my_facebook_provider:
-            id: my.fb.user
+            id: facebook.user
 
     firewalls:
         public:

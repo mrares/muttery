@@ -63,6 +63,26 @@ body {
 	margin-right: 10px;
 }
 
+#create-mutter {
+	display:none;
+	width:400px;
+    border:10px solid #666;
+ 
+    /* for modern browsers use semi-transparent color on the border. nice! */
+    border:10px solid rgba(82, 82, 82, 0.698);
+ 
+    /* hot CSS3 features for mozilla and webkit-based browsers (rounded borders) */
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+}
+
+#create-mutter div {
+    padding:10px;
+    border:1px solid #3B5998;
+    background-color:#fff;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif
+}
+
 #container * {
     -webkit-animation-name: fade-in;
     -webkit-animation-duration: .3s;
