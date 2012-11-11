@@ -24,3 +24,10 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+security:
+      firewalls:
+          public:
+              fos_facebook:
+                  app_url: "http://apps.facebook.com/muttery"
+                  server_url: "http://rares.muttery.webbicks.com/"

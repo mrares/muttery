@@ -23,13 +23,6 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
      * Get id
      *
      * @return integer
@@ -40,52 +33,18 @@ class User extends BaseUser
     }
 
     /**
-     * Set name
+     * @var string
      *
-     * @param string $name
-     * @return User
+     * @ORM\Column(name="firstname", type="string", length=255)
      */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+    protected $firstname;
 
     /**
-     * Get name
+     * @var string
      *
-     * @return string
+     * @ORM\Column(name="lastname", type="string", length=255)
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-
+    protected $lastname;
 
     /**
      * @var string
@@ -106,24 +65,85 @@ class User extends BaseUser
     }
 
     /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+    	return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+    	$this->firstname = $firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+    	return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+    	$this->lastname = $lastname;
+    }
+
+    /**
+     * Get the full name of the user (first + last name)
+     * @return string
+     */
+    public function getFullName()
+    {
+    	return $this->getFirstName() . ' ' . $this->getLastname();
+    }
+
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+    	$this->facebookId = $facebookId;
+    	$this->setUsername($facebookId);
+    	$this->salt = '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+    	return $this->facebookId;
+    }
+
+    /**
      * @param Array
      */
     public function setFBData($fbdata)
     {
-    	var_dump('=================');
-    	var_dump($fbdata);
     	if (isset($fbdata['id'])) {
     		$this->setFacebookId($fbdata['id']);
     		$this->addRole('ROLE_FACEBOOK');
     	}
     	if (isset($fbdata['first_name'])) {
-//     		$this->setFirstname($fbdata['first_name']);
+    		$this->setFirstname($fbdata['first_name']);
     	}
     	if (isset($fbdata['last_name'])) {
-//     		$this->setLastname($fbdata['last_name']);
+    		$this->setLastname($fbdata['last_name']);
     	}
     	if (isset($fbdata['email'])) {
     		$this->setEmail($fbdata['email']);
     	}
+
+    	return $this;
     }
+
 }

@@ -12,21 +12,19 @@ security:
 
     providers:
         my_facebook_provider:
-            id: fb.user
-#    
-#        in_memory:
-#            memory:
-#                users:
-#                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-#                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+            id: my.fb.user
 
     firewalls:
         public:
             # since anonymous is allowed users will not be forced to login
             pattern:   ^/.*
             fos_facebook:
-                app_url: "http://apps.facebook.com/appName/"
-                server_url: "http://localhost/facebookApp/"
+                app_url: "http://apps.facebook.com/muttery"
+                server_url: "http://muttery.rares.webicks.com/"
+                login_path: /loginFB
+                check_path: /login_check
+                default_target_path: /
+                provider: my_facebook_provider
             anonymous: true
             logout:
                 handlers: ["fos_facebook.logout_handler"]
@@ -34,22 +32,6 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-#        login:
-#            pattern:  ^/demo/secured/login$
-#            security: false
-
-#        secured_area:
-#            pattern:    ^/demo/secured/
-#            form_login:
-#                check_path: /demo/secured/login_check
-#                login_path: /demo/secured/login
-#            logout:
-#                path:   /demo/secured/logout
-#                target: /demo/
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

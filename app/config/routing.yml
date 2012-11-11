@@ -16,4 +16,5 @@ _security_check:
     pattern:  /login_check
 _security_logout:
     pattern:  /logout
-    
+_security_login:
+    pattern:  /loginFB  

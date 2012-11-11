@@ -1,5 +1,5 @@
 services:
-    fb.user:
+    my.fb.user:
         class: Webicks\MutteryBundle\Security\User\Provider\FacebookProvider
         arguments:
             facebook: "@fos_facebook.api"

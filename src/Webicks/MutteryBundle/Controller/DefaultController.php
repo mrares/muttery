@@ -15,33 +15,26 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	$myFriends = false;
-    	var_dump( $this->get('security.context')->getToken()->getUser() );
-    	var_dump( $this->getUser() );
-		$user = $this->get('security.context')->getToken()->getUser();
 
-    	if(is_object($user) && $user->getRole('ROLE_FB')) {
-        	$FBu = $this->get('fb.user');
-        	if($FBu->getMe()) {
-        		$myFriends = $FBu->getFriends();
-        	}
+    	if($this->getUser() && $this->getUser()->hasRole('ROLE_FACEBOOK')) {
+        	$FBu = $this->get('facebook');
+    	    $myFriends = $FBu->api('/me/friends');
+    	    $myFriends = array_slice($myFriends['data'], 0, 9);
     	}
-//     	$friend = $myFriends['data'][0];
-//     	var_dump($friend);
 
-//     	var_dump($FBu->fb()->api("/me/picture"));
-//     	$userkeys = array_keys($user) ;
+        return array('myFriends'=>$myFriends);
+    }
 
-//     	foreach($userkeys as $key) {
-//     		var_dump($key);
-//     	}
-
-//     	var_dump($this->get('my.facebook.user')->getUser('corina.mosescu'));
-
-//     	var_dump($this->get('my.facebook.user')->getFriends());
-//     	$securityContext = $container->get('security.context');
-//         $token = $securityContext->getToken();
-//         $user = $token->getUser();
-//     	var_dump($user);
-        return array('pending'=>array('rares','corina'), 'myFriends'=>$myFriends['data']);
+    /**
+     * @Route("/loginFB")
+     */
+    public function loginAction()
+    {
+    	$fb = $this->get('facebook');
+    	$fbdata = $fb->api('/me');
+    	if(!empty($fbdata)) {
+        	$this->get('my.fb.user')->loadUserByUsername($fbdata['id']);
+    	}
+    	return $this->redirect('/');
     }
 }
