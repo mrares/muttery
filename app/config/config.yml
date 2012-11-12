@@ -18,6 +18,13 @@ framework:
     trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
     session:         ~
 
+# add more server entries
+services:
+    memcached:
+        class: Memcached
+        calls:
+            - [ addServers, [ %memcached.servers% ]]
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
@@ -50,6 +57,11 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        result_cache_driver:
+            type: memcached
+            host: localhost
+            port: 11211
+            instance_class: Memcached
 
 # Swiftmailer Configuration
 swiftmailer:

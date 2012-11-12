@@ -16,10 +16,24 @@ class DefaultController extends Controller
     {
     	$myFriends = false;
 
+    	$logger = $this->get('logger');
+
     	if($this->getUser() && $this->getUser()->hasRole('ROLE_FACEBOOK')) {
-        	$FBu = $this->get('facebook');
-    	    $myFriends = $FBu->api('/me/friends');
-    	    $myFriends = array_slice($myFriends['data'], 0, 9);
+    		/*
+    		 * @var Memcached
+    		 */
+    		$cache = $this->get('memcached');
+    		if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
+    			$logger->info("Cache hit: friends");
+    			$myFriends = json_decode($myFriends);
+    		} else {
+    			$logger->info("Cache miss: friends");
+    			$FBu = $this->get('facebook');
+    			$myFriends = $FBu->api('/me/friends');
+    			$myFriends = $myFriends['data'];
+    			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
+    		}
+    		$myFriends = array_slice($myFriends, 0, 9);
     	}
 
         return array('myFriends'=>$myFriends);

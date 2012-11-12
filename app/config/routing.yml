@@ -8,9 +8,9 @@ webicks_muttery:
     type:     annotation
     prefix:   /
     
-_assetic:
-    resource: .
-    type:     assetic
+#_assetic:
+#    resource: .
+#    type:     assetic
     
 _security_check:
     pattern:  /login_check

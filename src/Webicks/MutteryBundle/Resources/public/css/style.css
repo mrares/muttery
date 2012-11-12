@@ -65,7 +65,7 @@ body {
 
 #create-mutter {
 	display:none;
-	width:400px;
+	width:655px;
     border:10px solid #666;
  
     /* for modern browsers use semi-transparent color on the border. nice! */
@@ -81,6 +81,38 @@ body {
     border:1px solid #3B5998;
     background-color:#fff;
     font-family:"lucida grande",tahoma,verdana,arial,sans-serif
+}
+
+#create-mutter .radio-button {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 200px;
+	height: 43px;
+	background: #222 url(../images/muttery-type.png) top repeat-x;
+}
+
+#create-mutter #mutter-type-message {
+	background-position: 0px 0px;
+}
+
+#create-mutter #mutter-type-message:checked {
+	background-position: 0px -43px;
+}
+
+#create-mutter #mutter-type-youtube {
+	background-position: -200px 0px;
+}
+
+#create-mutter #mutter-type-youtube:checked {
+	background-position: -200px -43px;
+}
+
+#create-mutter #mutter-type-redirect {
+	background-position: -400px 0px;
+}
+
+#create-mutter #mutter-type-redirect:checked {
+	background-position: -400px -43px;
 }
 
 #container * {

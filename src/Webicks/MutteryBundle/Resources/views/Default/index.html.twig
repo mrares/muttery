@@ -9,7 +9,15 @@ Welcome!
 {# Mutter creation overlay box to be displayed on FB login. #}
 <div id="create-mutter">
     <div>
-    Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!
+        <span id="ov-message">Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!</span>
+        <div>
+        <input type="text" id="mutter-name" value="" />
+        <input type="radio" id="mutter-type-message" name="mutter-type" class="radio-button" checked />
+        <input type="radio" id="mutter-type-youtube" name="mutter-type" class="radio-button"  />
+        <input type="radio" id="mutter-type-redirect" name="mutter-type" class="radio-button"  />
+
+        </div>
+
     </div>
 </div>
 
@@ -28,8 +36,8 @@ Welcome!
 
 <div class="grid col-380 fit">
     <div id="register-box">
-        {{ facebook_login_button({'autologoutlink': true}) }}
         {% if not app.user %}
+        {{ facebook_login_button({'autologoutlink': false}) }}
          and Start muttering!
          {% else %}
          Start muttering!
