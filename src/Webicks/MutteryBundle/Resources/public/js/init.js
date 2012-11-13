@@ -15,16 +15,15 @@ $(document).ready(function() {
 				window.location.href = "/";
 			});
 
-			userid = FB.getUserID();
-			if (userid) {
+			if (user && user.groups.indexOf('ROLE_FACEBOOK') && FB.getUserID() == user.userid) {
 				$("#create-mutter").overlay().load();
 			}
 		}
-	})
+	});
 	
 	$("#close-mutter").click(function() {
 		$("#create-mutter").overlay().close();
-	})
+	});
 
 	// select the overlay element - and "make it an overlay"
 	$("#create-mutter").overlay({
@@ -54,4 +53,4 @@ $(document).ready(function() {
 
 onFbInit = function() {
 	$(document).trigger('fbInit');
-}
+};
