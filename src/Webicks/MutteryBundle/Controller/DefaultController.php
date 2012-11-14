@@ -22,7 +22,7 @@ class DefaultController extends Controller
     		/*
     		 * @var Memcached
     		 */
-    		$cache = $this->get('memcached');
+    		$cache = $this->get('cache');
     		if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
     			$logger->info("Cache hit: friends");
     			$myFriends = json_decode($myFriends);

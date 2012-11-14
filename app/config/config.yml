@@ -20,7 +20,7 @@ framework:
 
 # Services configuration
 services:
-    memcached:
+    cache:
         class: Memcached
         calls:
             - [ addServers, [ %memcached.servers% ]]
