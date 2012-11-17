@@ -43,13 +43,17 @@ class Invite
     private $actioned;
 
     /**
-     * @var integer $user_id
+     * @var integer $fb_id
      *
-     * @ORM\Column(name="destination", type="integer")
+     * @ORM\Column(name="destination", type="string")
      */
     private $destination;
 
-
+    /**
+     * 
+     * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invite")
+     */
+    public $mutter;
     /**
      * Get id
      *
@@ -150,5 +154,10 @@ class Invite
     public function getDestination()
     {
         return $this->destination;
+    }
+    
+    public function getMutter()
+    {
+    	return $this->mutter;
     }
 }

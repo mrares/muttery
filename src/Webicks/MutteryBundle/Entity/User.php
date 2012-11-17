@@ -52,6 +52,12 @@ class User extends BaseUser
      * @ORM\Column(name="facebookId", type="string", length=255)
      */
     protected $facebookId;
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Mutter", mappedBy="owner")
+     */
+    private $mutter;
 
     public function serialize()
     {
@@ -122,6 +128,11 @@ class User extends BaseUser
     public function getFacebookId()
     {
     	return $this->facebookId;
+    }
+    
+    public function getMutter()
+    {
+    	return $this->mutter;
     }
 
     /**

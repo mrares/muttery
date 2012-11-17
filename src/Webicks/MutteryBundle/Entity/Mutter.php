@@ -63,6 +63,19 @@ class Mutter
      * @ORM\Column(name="owner_id", type="integer")
      */
     private $owner_id;
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Invite", mappedBy="mutter")
+     */
+    private $invite;
+    
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="User", inversedBy="mutter")
+     */
+    private $owner;
 
     /**
      * Get id
