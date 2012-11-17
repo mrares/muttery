@@ -43,7 +43,7 @@ class FacebookProvider implements UserProviderInterface
     	} else {
             try {
                 $fbdata = $this->facebook->api('/me');
-                $this->cache->set('fbu_'.$username, json_encode($fbdata), 600);
+                $this->cache->set('fbu_'.$username, json_encode($fbdata), 60);
             } catch (FacebookApiException $e) {
             	throw new UsernameNotFoundException('The user is not authenticated on facebook');
                 $fbdata = null;

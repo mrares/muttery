@@ -33,7 +33,7 @@ class DefaultController extends Controller
     			$myFriends = $myFriends['data'];
     			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     		}
-    		$myFriends = array_slice($myFriends, 0, 9);
+    		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
     	}
 
         return array('myFriends'=>$myFriends);

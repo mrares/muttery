@@ -115,6 +115,32 @@ body {
 	background-position: -400px -43px;
 }
 
+
+#create-mutter .active {
+	display: block;
+}
+
+#create-mutter .create-action {
+	display: noen;
+}
+
+#create-mutter .create-message {
+	
+}
+
+#create-mutter .create-message textarea {
+	width: 633px;
+	max-width: 633px;
+	height: 150px;
+}
+
+#create-mutter .save-action {
+	text-align: right;
+}
+
+#create-mutter .save-action input {
+}
+
 #container * {
     -webkit-animation-name: fade-in;
     -webkit-animation-duration: .3s;
