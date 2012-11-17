@@ -2,6 +2,12 @@
 
 namespace Webicks\MutteryBundle\Controller;
 
+use Webicks\MutteryBundle\Entity\Invite;
+
+use Webicks\MutteryBundle\Entity\Mutter;
+
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -37,6 +43,54 @@ class DefaultController extends Controller
     	}
 
         return array('myFriends'=>$myFriends);
+    }
+
+    /**
+     * @Route("/saveMutter")
+     */
+    public function saveMutterAction() {
+    	$request = $this->getRequest()->get('data');
+    	$return = array();
+
+    	if(empty($request['name'])) {
+    		return new Response();
+    	}
+
+    	try {
+	    	$em = $this->getDoctrine()->getEntityManager();
+        	$mutter = new Mutter();
+        	$mutter->setName($request['name']);
+        	$mutter->setOwnerId($this->getUser()->getFacebookId());
+        	$mutter->setDateActive(new \DateTime());
+
+        	$em->persist($mutter);
+        	$em->flush($mutter);
+        	$em->refresh($mutter);
+
+        	foreach($request['invites'] as $invitee) {
+        		$invite = new Invite();
+        		$invite->setDestination($invitee);
+        		$invite->setMutterId($mutter->getId());
+
+        		$em->persist($invite);
+        	}
+
+        	$em->flush();
+
+        	$return = array(
+        			"success"=>true,
+        			"mutter_id"=>$mutter->getId()
+        			);
+    	} catch (Exception $e) {
+    		$return = array(
+    				"success"=>false,
+    				"exception"=>true,
+    				"message"=> $e->getMessage());
+    	}
+
+    	$response = new Response();
+    	$response->setContent(json_encode($return));
+    	return $response;
     }
 
     /**

@@ -33,24 +33,29 @@ class Invite
      *
      * @ORM\Column(name="sent", type="boolean")
      */
-    private $sent;
+    private $sent = 0;
 
     /**
      * @var boolean $actioned
      *
      * @ORM\Column(name="actioned", type="boolean")
      */
-    private $actioned;
+    private $actioned = 0;
 
     /**
-     * @var integer $user_id
+     * @var integer $fb_id
      *
-     * @ORM\Column(name="destination", type="integer")
+     * @ORM\Column(name="destination", type="string")
      */
     private $destination;
 
-
     /**
+     * 
+     * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invite")
+     */
+    public $mutter;
+    /**
+
      * Get id
      *
      * @return integer

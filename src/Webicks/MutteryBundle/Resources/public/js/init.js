@@ -46,6 +46,10 @@ $(document).ready(function() {
 	});
 
 	$("#invite-friends").click(function(){
+		var MutterData = {
+				name: $('#mutter-name').val(),
+				invites: []
+		};
 		$("#create-mutter").overlay().close();
 		
 		FB.getLoginStatus(function(response){
@@ -54,7 +58,23 @@ $(document).ready(function() {
 				display: "iframe",
 				access_token: user.authResponse.accessToken,
 				message: 'Invitation to Muttery!'
-			}, function(res){console.log(res);});
+			}, function(res){
+					MutterData.invites = res.to;
+					
+					$.ajax(
+						'http://' + document.domain + '/saveMutter',
+						{
+						type: "POST",
+						data: {data: MutterData},
+						dataType: 'json',
+						success: function(){
+							console.log("SUCCESS!");
+						},
+						error: function(){
+							console.log("REQUEST FAILED! ");
+						}
+					});
+				});
 		});
 		
 	});

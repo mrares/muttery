@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Mutter
 {
+
+	public function __construct() {
+		$this->date_added = new \DateTime();
+	}
+
     /**
      * @var integer $id
      *
@@ -38,23 +43,23 @@ class Mutter
     /**
      * @var \DateTime $date_active
      *
-     * @ORM\Column(name="date_active", type="datetime")
+     * @ORM\Column(name="date_active", type="datetime", nullable = true)
      */
-    private $date_active;
+    private $date_active = null;
 
     /**
      * @var \DateTime $date_end
      *
-     * @ORM\Column(name="date_end", type="datetime")
+     * @ORM\Column(name="date_end", type="datetime", nullable = true)
      */
-    private $date_end;
+    private $date_end = null;
 
     /**
      * @var integer $done
      *
      * @ORM\Column(name="done", type="integer")
      */
-    private $done;
+    private $done = 0;
 
 
     /**
@@ -63,6 +68,19 @@ class Mutter
      * @ORM\Column(name="owner_id", type="integer")
      */
     private $owner_id;
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Invite", mappedBy="mutter")
+     */
+    private $invite;
+    
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="User", inversedBy="mutter")
+     */
+    private $owner;
 
     /**
      * Get id
