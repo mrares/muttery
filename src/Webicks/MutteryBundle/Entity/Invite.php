@@ -55,7 +55,6 @@ class Invite
      */
     public $mutter;
     /**
-
      * Get id
      *
      * @return integer
@@ -155,5 +154,10 @@ class Invite
     public function getDestination()
     {
         return $this->destination;
+    }
+    
+    public function getMutter()
+    {
+    	return $this->mutter;
     }
 }
