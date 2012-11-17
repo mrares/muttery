@@ -67,7 +67,6 @@ class Mutter
      */
     private $invites;
 
-
     /**
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="mutters")
@@ -180,7 +179,7 @@ class Mutter
      * Set done
      *
      * @param integer $done
-     * @return Mutter
+     * @return \Webicks\MutteryBundle\Entity\Mutter
      */
     public function setDone($done)
     {
@@ -200,24 +199,24 @@ class Mutter
     }
 
     /**
-     * Get owner Id
+     * Get owner
      *
-     * @return integer
+     * @return \Webicks\MutteryBundle\Entity\User
      */
-    public function getOwnerId()
+    public function getOwner()
     {
-    	return $this->owner_id;
+    	return $this->owner;
     }
 
     /**
-     * Set owner Id
+     * Set owner
      *
-     * @param integer $owner_id
+     * @param User $owner_id
      * @return \Webicks\MutteryBundle\Entity\Mutter
      */
-    public function setOwnerId($owner_id)
+    public function setOwner($owner)
     {
-    	$this->owner_id = $owner_id;
+    	$this->owner = $owner;
 
     	return $this;
     }

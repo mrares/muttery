@@ -22,13 +22,6 @@ class Invite
     private $id;
 
     /**
-     * @var integer $mutter_id
-     *
-     * @ORM\Column(name="mutter_id", type="integer")
-     */
-    private $mutter_id;
-
-    /**
      * @var boolean $sent
      *
      * @ORM\Column(name="sent", type="boolean")
@@ -50,11 +43,11 @@ class Invite
     private $destination;
 
     /**
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invites")
      */
     public $mutter;
-    
+
     /**
      * Get id
      *
@@ -68,12 +61,12 @@ class Invite
     /**
      * Set mutter_id
      *
-     * @param integer $mutterId
+     * @param Mutter $mutter
      * @return Invite
      */
-    public function setMutterId($mutterId)
+    public function setMutter($mutter)
     {
-        $this->mutter_id = $mutterId;
+        $this->mutter = $mutter;
 
         return $this;
     }
@@ -81,11 +74,11 @@ class Invite
     /**
      * Get mutter_id
      *
-     * @return integer
+     * @return \Webicks\MutteryBundle\Entity\Mutter
      */
-    public function getMutterId()
+    public function getMutter()
     {
-        return $this->mutter_id;
+        return $this->mutter;
     }
 
     /**
@@ -155,10 +148,5 @@ class Invite
     public function getDestination()
     {
         return $this->destination;
-    }
-
-    public function getMutter()
-    {
-    	return $this->mutter;
     }
 }
