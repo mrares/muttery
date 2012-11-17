@@ -60,7 +60,7 @@ class DefaultController extends Controller
 	    	$em = $this->getDoctrine()->getEntityManager();
         	$mutter = new Mutter();
         	$mutter->setName($request['name']);
-        	$mutter->setOwnerId($this->getUser()->getFacebookId());
+        	$mutter->setOwner($this->getUser());
         	$mutter->setDateActive(new \DateTime());
 
         	$em->persist($mutter);
@@ -70,7 +70,7 @@ class DefaultController extends Controller
         	foreach($request['invites'] as $invitee) {
         		$invite = new Invite();
         		$invite->setDestination($invitee);
-        		$invite->setMutterId($mutter->getId());
+        		$invite->setMutter($mutter);
 
         		$em->persist($invite);
         	}
