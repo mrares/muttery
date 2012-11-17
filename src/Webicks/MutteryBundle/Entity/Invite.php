@@ -51,9 +51,10 @@ class Invite
 
     /**
      * 
-     * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invite")
+     * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invites")
      */
     public $mutter;
+    
     /**
      * Get id
      *
@@ -155,7 +156,7 @@ class Invite
     {
         return $this->destination;
     }
-    
+
     public function getMutter()
     {
     	return $this->mutter;

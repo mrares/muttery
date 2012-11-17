@@ -55,9 +55,9 @@ class User extends BaseUser
     
     /**
      *
-     * @ORM\OneToOne(targetEntity="Mutter", mappedBy="owner")
+     * @ORM\OneToMany(targetEntity="Mutter", mappedBy="owner")
      */
-    private $mutter;
+    private $mutters;
 
     public function serialize()
     {

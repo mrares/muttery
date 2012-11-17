@@ -61,24 +61,16 @@ class Mutter
      */
     private $done = 0;
 
-
-    /**
-     * @var integer $owner_id
-     *
-     * @ORM\Column(name="owner_id", type="integer")
-     */
-    private $owner_id;
-
     /**
      *
      * @ORM\OneToMany(targetEntity="Invite", mappedBy="mutter")
      */
-    private $invite;
+    private $invites;
 
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="User", inversedBy="mutter")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="mutters")
      */
     private $owner;
 
