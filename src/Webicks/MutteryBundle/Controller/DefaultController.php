@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 
 class DefaultController extends Controller
 {
@@ -28,14 +30,15 @@ class DefaultController extends Controller
 
     	if($this->getUser() && $this->getUser()->hasRole('ROLE_FACEBOOK')) {
     		/*
+    		 * Getting memcache service to use the caching layer
     		 * @var Memcached
     		 */
     		$cache = $this->get('cache');
+
+    		//Getting My Friend list from cache, much faster than getting it from FB
     		if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
-    			$logger->info("Cache hit: friends");
     			$myFriends = json_decode($myFriends);
     		} else {
-    			$logger->info("Cache miss: friends");
     			$FBu = $this->get('facebook');
     			$myFriends = $FBu->api('/me/friends');
     			$myFriends = $myFriends['data'];
@@ -48,7 +51,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/saveMutter")
+     * @Route("/saveMutter", name="_secured_save_mutter")
+     * @Secure(roles="ROLE_FACEBOOK")
      */
     public function saveMutterAction() {
     	$request = $this->getRequest()->get('data');
