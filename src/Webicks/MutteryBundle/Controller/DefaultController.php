@@ -2,6 +2,8 @@
 
 namespace Webicks\MutteryBundle\Controller;
 
+use Webicks\MutteryBundle\Entity\MutterData;
+
 use Webicks\MutteryBundle\Entity\Invite;
 
 use Webicks\MutteryBundle\Entity\Mutter;
@@ -63,18 +65,20 @@ class DefaultController extends Controller
         	$mutter->setOwner($this->getUser());
         	$mutter->setDateActive(new \DateTime());
 
-        	$em->persist($mutter);
-        	$em->flush($mutter);
-        	$em->refresh($mutter);
+        	$mutter->setData(
+        			new MutterData(
+        					$request['type'],
+        					$request['data']
+        					)
+        			);
 
         	foreach($request['invites'] as $invitee) {
         		$invite = new Invite();
         		$invite->setDestination($invitee);
-        		$invite->setMutter($mutter);
-
-        		$em->persist($invite);
+        		$mutter->setInvite($invite);
         	}
 
+    		$em->persist($mutter);
         	$em->flush();
 
         	$return = array(

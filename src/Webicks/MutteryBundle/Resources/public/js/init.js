@@ -45,9 +45,33 @@ $(document).ready(function() {
 		$("#create-mutter").overlay().close();
 	});
 
+	$('[name="mutter-type"]').change(function(ev){
+		
+		active = $(ev.target);
+		console.log(active.val());
+		
+		$('.create-action').removeClass('active');
+		$('.create-' + active.val()).addClass('active');
+		
+	});
+	
 	$("#invite-friends").click(function(){
+		
+		var mutterActionData = [];
+		mutterType = $('[name="mutter-type"]:checked').val();
+		
+		if (mutterType == "message") {
+			mutterActionData = $('#mutter-data-message').val();
+		} else if (mutterType == "youtube") {
+			mutterActionData = "YOUTUBE";
+		} else if (mutterType == "redirect") {
+			mutterActionData = $('#mutter-data-redirect').val();
+		}
+		
 		var MutterData = {
 				name: $('#mutter-name').val(),
+				type: mutterType,
+				data: mutterActionData,
 				invites: []
 		};
 		$("#create-mutter").overlay().close();

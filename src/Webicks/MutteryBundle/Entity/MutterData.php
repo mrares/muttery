@@ -12,6 +12,20 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class MutterData
 {
+
+	/**
+	 * Create a MutterData record pre-populated with data
+	 *
+	 * @param string $type
+	 * @param string $data
+	 */
+	public function __construct($type = null, $data = null) {
+		if($type && $data) {
+			$this->type = $type;
+			$this->data = $data;
+		}
+	}
+
     /**
      * @var integer
      *
@@ -24,7 +38,7 @@ class MutterData
     /**
      * @var integer
      *
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\Column(name="type", type="string", length=32)
      */
     private $type;
 
@@ -94,5 +108,19 @@ class MutterData
     public function getData()
     {
         return $this->data;
+    }
+
+
+    /**
+     * Set Mutter relationship
+     *
+     * @param \Webicks\MutteryBundle\Entity\Mutter $mutter
+     * @return \Webicks\MutteryBundle\Entity\MutterData
+     */
+    public function setMutter($mutter)
+    {
+    	$this->mutter = $mutter;
+
+    	return $this;
     }
 }

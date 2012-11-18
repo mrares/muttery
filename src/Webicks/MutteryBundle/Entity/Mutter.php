@@ -2,6 +2,8 @@
 
 namespace Webicks\MutteryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -63,9 +65,9 @@ class Mutter
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Invite", mappedBy="mutter")
+     * @ORM\OneToMany(targetEntity="Invite", mappedBy="mutter", cascade={"persist", "remove"})
      */
-    private $invites;
+    private $invites = null;
 
     /**
      *
@@ -74,7 +76,7 @@ class Mutter
     private $owner;
 
     /**
-     * @ORM\OneToOne(targetEntity="MutterData", inversedBy="mutter")
+     * @ORM\OneToOne(targetEntity="MutterData", inversedBy="mutter", cascade={"persist", "remove"})
      */
     private $data = null;
 
@@ -131,7 +133,7 @@ class Mutter
      */
     public function getDateAdded()
     {
-        return $this->date_added;
+    	return $this->date_added;
     }
 
     /**
@@ -225,4 +227,42 @@ class Mutter
 
     	return $this;
     }
+
+    /**
+     * Get data
+     *
+     * @return string
+     */
+	public function getData() {
+		return $this->data;
+	}
+
+    /**
+     * Set data
+     *
+     * @param MutterData $owner_id
+     * @return \Webicks\MutteryBundle\Entity\Mutter
+     */
+	public function setData($data) {
+		$this->data = $data;
+		$this->data->setMutter($this);
+
+		return $this;
+	}
+
+	public function getInvites() {
+		return $this->invites;
+	}
+
+	public function setInvite($invite) {
+		if ($this->invites == null ) {
+			$this->invites = new ArrayCollection();
+		}
+
+		$this->invites[] = $invite;
+		$invite->setMutter($this);
+
+		return $this;
+	}
+
 }

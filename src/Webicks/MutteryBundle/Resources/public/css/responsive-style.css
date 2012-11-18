@@ -1821,7 +1821,7 @@ form div {
 /* =Primary Main Menu IE Fixes
 -------------------------------------------------------------- */
 .ie7 .menu ul {
-	background: url(../images/ie7-fix.gif) repeat;
+	background: url(/bundles/webicksmuttery/images/ie7-fix.gif) repeat;
 }
 
 .ie7 .menu li li a  {
@@ -2001,7 +2001,7 @@ form div {
 /* =Sub Header Menu IE Fixes
 -------------------------------------------------------------- */
 .ie7 .sub-header-menu ul {
-	background: url(../images/ie7-fix.gif) repeat;
+	background: url(/bundles/webicksmuttery/images/ie7-fix.gif) repeat;
 }
 
 .ie7 .sub-header-menu li li a  {
@@ -2657,7 +2657,7 @@ BDO[DIR="rtl"] {
 		-moz-appearance: none !important;
 		-webkit-appearance: none !important;
 		appearance: none !important;
-		background: #fff url(../images/bg-select.png) no-repeat right;
+		background: #fff url(/bundles/webicksmuttery/images/bg-select.png) no-repeat right;
 		border: 1px solid #ccc;
         font-size: 12px;
 		overflow: hidden;

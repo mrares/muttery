@@ -15,7 +15,7 @@ Version: 1.0
 /* =Base
 -------------------------------------------------------------- */
 body {
-    background: #fff url(../images/bg.png) repeat-x;
+    background: #fff url((/bundles/webicksmuttery/images/bg.png) repeat-x;
     color: #222;
     font-size: 15px;
     font-family: 'Muli', Verdana, Helvetica, sans-serif;
@@ -88,7 +88,7 @@ body {
 	-webkit-appearance: none;
 	width: 200px;
 	height: 43px;
-	background: #222 url(../images/muttery-type.png) top repeat-x;
+	background: #222 url(/bundles/webicksmuttery/images/muttery-type.png) top repeat-x;
 }
 
 #create-mutter #mutter-type-message {
@@ -115,13 +115,12 @@ body {
 	background-position: -400px -43px;
 }
 
+#create-mutter .create-action {
+	display: none;
+}
 
 #create-mutter .active {
 	display: block;
-}
-
-#create-mutter .create-action {
-	display: noen;
 }
 
 #create-mutter .create-message {
@@ -780,7 +779,7 @@ h6 {
 /* =Footer
 -------------------------------------------------------------- */
 #footer {
-    background: #222 url(../images/bg-footer.png) top repeat-x;
+    background: #222 url(/bundles/webicksmuttery/images/bg-footer.png) top repeat-x;
     color: #666666;
     width: 100%;
     max-width: 100%;
@@ -925,7 +924,7 @@ h6 {
 		-moz-appearance: none !important;
 		-webkit-appearance: none !important;
 		appearance: none !important;
-		background: #fff url(../images/bg-select.png) no-repeat right;
+		background: #fff url(/bundles/webicksmuttery/images/bg-select.png) no-repeat right;
 		border: 1px solid #ccc;
         font-size: 12px;
 		overflow: hidden;

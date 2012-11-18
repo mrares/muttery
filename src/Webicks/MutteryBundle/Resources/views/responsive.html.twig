@@ -6,23 +6,12 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     {% stylesheets
-        'bundles/webicksmuttery/css/responsive-style.css'
-        'bundles/webicksmuttery/css/style.css'
-        filter='cssrewrite'
-    %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-
-{#  Figure out why this is not working as advertised! #}
-{#
-    {% stylesheets
         '@WebicksMutteryBundle/Resources/public/css/responsive-style.css'
         '@WebicksMutteryBundle/Resources/public/css/style.css'
         filter='cssrewrite'
     %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
- #}
 
     <script type="text/javascript">
     {% if app.user %}
@@ -31,6 +20,9 @@
     {% else %}
         var user = false;
     {% endif %}
+    {% block headJS %}
+    {# Enable sub-templates to inject header js #}
+    {% endblock %}
     </script>
 
 	{% javascripts
