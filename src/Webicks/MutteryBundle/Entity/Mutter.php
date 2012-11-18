@@ -74,6 +74,11 @@ class Mutter
     private $owner;
 
     /**
+     * @ORM\OneToOne(targetEntity="MutterData", inversedBy="mutter")
+     */
+    private $data = null;
+
+    /**
      * Get id
      *
      * @return integer

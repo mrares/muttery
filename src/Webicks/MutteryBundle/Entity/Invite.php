@@ -43,10 +43,9 @@ class Invite
     private $destination;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invites")
      */
-    public $mutter;
+    private $mutter;
 
     /**
      * Get id
