@@ -36,7 +36,29 @@ Welcome!
         <input id="invite-friends" type="button" name="send" value="Ok" />
     </div>
 </div>
-
+{% if multiple == 1 %}    
+<div id="select-mutter">
+	Welcome {{ user.FirstName}}, you have multiple events active, please choose one!
+	<div>
+		<span class="title">Active Mutters:</span>
+		{% for muttery in mutters %}
+			<div class="muttery">
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : muttery.id}) }}">{{ muttery.name }}</a>
+				, created by you.
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : muttery.id}) }}">Open</a>			
+			</div>			
+		{% endfor %}
+		
+		{% for invite in invites %}
+			<div class="invite">
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : invite.mutter.id}) }}">{{ invite.mutter.name }}</a>
+				, in which you was invited by {{ invite.mutter.owner.fullname }}.
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : invite.mutter.id}) }}">Open</a>
+			</div>			
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
 <div class="grid col-540">
     <h1>We're waiting for you:</h1>
     <hr />

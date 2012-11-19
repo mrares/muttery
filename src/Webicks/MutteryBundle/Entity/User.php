@@ -57,7 +57,7 @@ class User extends BaseUser
      *
      * @ORM\OneToMany(targetEntity="Mutter", mappedBy="owner")
      */
-    private $mutters;
+    private $mutters;       
 
     public function serialize()
     {
@@ -128,6 +128,16 @@ class User extends BaseUser
     public function getFacebookId()
     {
     	return $this->facebookId;
+    }
+    
+    /**
+     * Get mutter_id
+     *
+     * @return \Webicks\MutteryBundle\Entity\Mutter
+     */
+    public function getMutters()
+    {
+    	return $this->mutters;
     }
 
     /**

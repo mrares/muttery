@@ -25,10 +25,15 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	$myFriends = false;
+    	$mutters = false;
+    	$invites = false;
+    	$user = false;
+    	$multiple = 0;
 
     	$logger = $this->get('logger');
 
-    	if($this->getUser() && $this->getUser()->hasRole('ROLE_FACEBOOK')) {
+    	$user = $this->getUser();
+    	if($user && $user->hasRole('ROLE_FACEBOOK')) {
     		/*
     		 * Getting memcache service to use the caching layer
     		 * @var Memcached
@@ -44,10 +49,37 @@ class DefaultController extends Controller
     			$myFriends = $myFriends['data'];
     			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     		}
+    		$em = $this->getDoctrine ()->getEntityManager ();     		   		
+    		$mutters = $user->getMutters();
+    		
+    		// @todo: we need to retrieve only the active mutters (through a function in doctrine or condition is the below loop)
+    		foreach ($mutters as $mutter)
+    		{
+    			if ($mutter->getDateActive() > date('Y-m-y H:m:s'));
+    			{
+    				
+    			}
+    		}
+
+    		$invites = $em->getRepository('\Webicks\MutteryBundle\Entity\Invite')->findBy(array(
+    			'destination' => $user->getFacebookId(),    				
+    		));    		    		    	
+
+    		if (count($mutters) > 1 || count($invites) > 1 || count($mutters)==1 && count($invites)==1)
+    		{
+    			$multiple = 1;
+    		}
+    		    		
     		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
     	}
 
-        return array('myFriends'=>$myFriends);
+        return array(
+        	'myFriends'=>$myFriends,
+        	'mutters'=>$mutters,
+        	'invites'=>$invites,
+        	'user'=>$user,
+        	'multiple'=>$multiple,
+        );
     }
 
     /**
