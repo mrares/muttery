@@ -1,0 +1,27 @@
+{% extends "WebicksMutteryBundle::responsive.html.twig" %}
+
+{% block headJS %}
+var MutterActionData = '';
+{% endblock %}
+
+{% block header_message %}
+Welcome!
+{% endblock %}
+
+{% block body %}
+{# Mutter creation overlay box to be displayed on FB login. #} 
+	<div class="mutter-title">
+		Mutter {{ mutter.name }}, created by {{ mutter.owner.getFullName }}
+		<img src="https://graph.facebook.com/{{ mutter.owner.getFacebookId }}/picture?type=large" />
+	</div>
+	<div class="mutter-invites">		
+		{% for invite in mutter.getInvites %}
+ 		<div class="userbox">
+            <div class="username"></div>
+            <div class="picture">
+            	<img src="https://graph.facebook.com/{{ invite.destination }}/picture?type=large" />
+            </div>
+        </div>
+		{% endfor %}	
+	</div>
+{% endblock %}
