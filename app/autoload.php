@@ -2,6 +2,8 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
+set_include_path(get_include_path().PATH_SEPARATOR.'../zend/');
+
 $loader = require __DIR__.'/../vendor/autoload.php';
 
 // intl
