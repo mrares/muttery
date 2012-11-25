@@ -22,7 +22,7 @@ class MutterController extends Controller
     public function indexAction($id)
     {
     	$cache = $this->get('cache');
-
+    	
     	//Getting My Friend list from cache, much faster than getting it from FB
     	if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
     		$myFriends = json_decode($myFriends);
@@ -37,7 +37,7 @@ class MutterController extends Controller
 
 		// @todo: we need to assure that the mutter can be seen only by the invited users
     	$em = $this->getDoctrine()->getEntityManager();
-    	$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$id);
+		$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$id);
 
     	return array(
     		'mutter'=>$mutter,
