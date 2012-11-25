@@ -12,4 +12,38 @@ use Doctrine\ORM\EntityRepository;
  */
 class MutterRepository extends EntityRepository
 {
+	public function getActiveMutters($user) {
+		$date = new \DateTime ();
+	
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+	
+		$qb ->add('select', 'm')
+		->add('from', 'Webicks\MutteryBundle\Entity\Mutter m')
+		->add('where', 'm.date_active < :start and m.owner = :user')
+		->setParameter ( 'start' , $date)
+		->setParameter ( 'user' , $user);
+	
+		$query = $qb->getQuery();
+	
+		return $query->getResult();
+	}
+	
+	public function getActiveInvites($FacebookId) {
+		$date = new \DateTime ();
+	
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+	
+		$qb ->select('m')
+		->from('Webicks\MutteryBundle\Entity\Mutter','m')
+		->innerJoin('Webicks\MutteryBundle\Entity\Invite', 'i','WITH', 'm.id = i.mutter_id')
+		->where('m.date_active < :start and i.destination = :user')
+		->setParameter ( 'start' , $date)
+		->setParameter ( 'user' , $FacebookId);
+	
+		$query = $qb->getQuery();
+	
+		return $query->getResult();
+	}
 }

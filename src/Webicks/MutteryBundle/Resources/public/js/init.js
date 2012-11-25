@@ -127,4 +127,14 @@ $(document).ready(function() {
 		load : false
 	});
 
+	$('#ytLoginAction').click(function(){
+		var windowDest = $('#GAuth_win').text();
+		if(windowDest) {
+			loginWindow = window.open(windowDest, "YTLogin", 'width=500');
+		}
+	});
+	
+	$(document).bind('YTLoggedin', function(param){
+		$('#createActionYoutube').load('/ytUpload')
+	});
 });
