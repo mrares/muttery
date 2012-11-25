@@ -1,0 +1,10 @@
+{% if loggedIn %}
+    {% render "WebicksMutteryBundle:Youtube:upload" %}
+{% else %}
+    <div>
+        <div id="GAuth_win" style="display:none;">{{ dest }}"></div>
+        In order to upload Youtube videos you need to authenticate into Youtube and allow access to our website.
+        <br></br>
+        <a href="javascript://" id="ytLoginAction">Login YouTube.</a>
+    </div>
+{% endif %}
