@@ -36,6 +36,7 @@ Welcome!
         <input id="invite-friends" type="button" name="send" value="Ok" />
     </div>
 </div>
+{% if app.user %}
 <div id="select-mutter">
 	Welcome {{ user.FirstName}}, you have multiple events active, please choose one!
 	<div>
@@ -56,7 +57,7 @@ Welcome!
 		{% endfor %}
 	</div>
 </div>
-
+{% endif %}
 <div class="grid col-540">
     <h1>We're waiting for you:</h1>
     <hr />
