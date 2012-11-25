@@ -98,7 +98,6 @@ class YoutubeController extends Controller
 			$redirectDestination = $this->getYTAuthUrl($redirectDestination);
 		} elseif(!$session->get('sessionToken')) {
 			$sessionToken = \Zend_Gdata_AuthSub::getAuthSubSessionToken($token);
-			var_dump($sessionToken);
 			$session->set('sessionToken', $sessionToken);
 		}
 
