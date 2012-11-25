@@ -23,42 +23,40 @@ Welcome!
         </div>
 
     </div>
-    <div class="create-action create-message active">
+    <div id="createActionMessage" class="create-action create-message active">
         <textarea id="mutter-data-message">Your message here!</textarea>
     </div>
-    <div class="create-action create-youtube">
-        Youtube stuff!
+    <div id="createActionYoutube" class="create-action create-youtube">
+        {% render "WebicksMutteryBundle:Youtube:init" %}
     </div>
-    <div class="create-action create-redirect">
+    <div id="createActionRedirect" class="create-action create-redirect">
         <input type="text" value="Redirect to URL!" name="mutter-data-redirect" id="mutter-data-redirect" />
     </div>
     <div class="save-action">
         <input id="invite-friends" type="button" name="send" value="Ok" />
     </div>
 </div>
-{% if multiple == 1 %}
 <div id="select-mutter">
 	Welcome {{ user.FirstName}}, you have multiple events active, please choose one!
 	<div>
 		<span class="title">Active Mutters:</span>
-		{% for muttery in mutters %}
+		{% for mutter in mutters %}
 			<div class="muttery">
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : muttery.id}) }}">{{ muttery.name }}</a>
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">{{ mutter.name }}</a>
 				, created by you.
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : muttery.id}) }}">Open</a>
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">Open</a>
 			</div>
-		{% endfor %}
-
-		{% for invite in invites %}
+		{% endfor %}		
+		{% for mutter in invites %}
 			<div class="invite">
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : invite.mutter.id}) }}">{{ invite.mutter.name }}</a>
-				, in which you was invited by {{ invite.mutter.owner.fullname }}.
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : invite.mutter.id}) }}">Open</a>
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">{{ mutter.name }}</a>
+				, in which you was invited by {{ mutter.owner.fullname }}.
+				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">Open</a>
 			</div>
 		{% endfor %}
 	</div>
 </div>
-{% endif %}
+
 <div class="grid col-540">
     <h1>We're waiting for you:</h1>
     <hr />
@@ -71,7 +69,6 @@ Welcome!
     {% endfor %}
     </div>
 </div>
-
 <div class="grid col-380 fit">
     <div id="register-box">
         {% if not app.user %}

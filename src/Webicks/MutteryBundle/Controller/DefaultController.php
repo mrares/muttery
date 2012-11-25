@@ -41,26 +41,10 @@ class DefaultController extends Controller
     			$myFriends = $myFriends['data'];
     			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     		}
-    		$em = $this->getDoctrine()->getEntityManager();
-    		$mutters = $user->getMutters();
-
-    		// @todo: we need to retrieve only the active mutters (through a function in doctrine or condition is the below loop)
-    		foreach ($mutters as $mutter)
-    		{
-    			if ($mutter->getDateActive() > date('Y-m-y H:m:s'));
-    			{
-
-    			}
-    		}
-
-    		$invites = $em->getRepository('\Webicks\MutteryBundle\Entity\Invite')->findBy(array(
-    				'destination' => $user->getFacebookId(),
-    		));
-
-    		if (count($mutters) > 1 || count($invites) > 1 || count($mutters)==1 && count($invites)==1)
-    		{
-    			$multiple = 1;
-    		}
+    		$em = $this->getDoctrine()->getEntityManager();    		
+    		
+    		$mutters = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveMutters($user);    		
+    		$invites = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveInvites($user->getFacebookId());
 
     		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
     	}
@@ -70,7 +54,6 @@ class DefaultController extends Controller
         	'mutters'=>$mutters,
         	'invites'=>$invites,
         	'user'=>$user,
-        	'multiple'=>$multiple,
         );
     }
 
