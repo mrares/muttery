@@ -1,9 +1,6 @@
 $(document).ready(function() {
 	$(document).bind('fbInit', function(){
-		console.log("FbInit called!");
 		if (typeof (FB) != 'undefined' && FB != null) {
-			console.log("FB is defined!");
-			
 			FB.Event.subscribe('auth.statusChange', function(response) {
 				if (!user || !user.groups || user.groups.indexOf('ROLE_FACEBOOK') == -1) {
 					if ((response.session || response.authResponse)) {
@@ -46,13 +43,8 @@ $(document).ready(function() {
 	});
 
 	$('[name="mutter-type"]').change(function(ev){
-		
-		active = $(ev.target);
-		console.log(active.val());
-		
 		$('.create-action').removeClass('active');
-		$('.create-' + active.val()).addClass('active');
-		
+		$('.create-' + $(ev.target).val()).addClass('active');
 	});
 	
 	$("#invite-friends").click(function(){
@@ -135,6 +127,9 @@ $(document).ready(function() {
 	});
 	
 	$(document).bind('YTLoggedin', function(param){
-		$('#createActionYoutube').load('/ytUpload')
+		$('#createActionYoutube').mask('Loading');
+		$('#createActionYoutube').load('/ytUpload', function(){
+			$('#createActionYoutube').unmask();
+		});
 	});
 });

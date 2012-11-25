@@ -15,7 +15,7 @@ Version: 1.0
 /* =Base
 -------------------------------------------------------------- */
 body {
-    background: #fff url((/bundles/webicksmuttery/images/bg.png) repeat-x;
+    background: #fff url(/bundles/webicksmuttery/images/bg.png) repeat-x;
     color: #222;
     font-size: 15px;
     font-family: 'Muli', Verdana, Helvetica, sans-serif;
@@ -67,6 +67,7 @@ body {
 	display:none;
 	width:655px;
     border:10px solid #666;
+    background-color:#fff;
  
     /* for modern browsers use semi-transparent color on the border. nice! */
     border:10px solid rgba(82, 82, 82, 0.698);
@@ -78,8 +79,10 @@ body {
 
 #create-mutter div {
     padding:10px;
+}
+
+#create-mutter div.header {
     border:1px solid #3B5998;
-    background-color:#fff;
     font-family:"lucida grande",tahoma,verdana,arial,sans-serif
 }
 

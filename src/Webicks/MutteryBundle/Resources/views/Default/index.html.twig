@@ -12,7 +12,7 @@ Welcome!
 
 {# Mutter creation overlay box to be displayed on FB login. #}
 <div id="create-mutter">
-    <div>
+    <div class="header">
         <span id="ov-message">Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!</span>
         <div>
         <input type="text" id="mutter-name" value="" />
@@ -47,7 +47,7 @@ Welcome!
 				, created by you.
 				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">Open</a>
 			</div>
-		{% endfor %}		
+		{% endfor %}
 		{% for mutter in invites %}
 			<div class="invite">
 				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">{{ mutter.name }}</a>
