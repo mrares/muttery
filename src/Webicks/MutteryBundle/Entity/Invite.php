@@ -20,7 +20,7 @@ class Invite
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var integer $mutter_id
      *
@@ -52,10 +52,10 @@ class Invite
     /**
      * @var string $fb_name
      *
-     * @ORM\Column(name="temp_name", type="string", length=255)
+     * @ORM\Column(name="temp_name", type="string", length=255, nullable=true)
      */
     private $fb_name;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invites")
      */

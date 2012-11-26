@@ -22,7 +22,7 @@ class MutterController extends Controller
     public function indexAction($id)
     {
     	$cache = $this->get('cache');
-    	
+
     	//Getting My Friend list from cache, much faster than getting it from FB
     	if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
     		$myFriends = json_decode($myFriends);
@@ -65,6 +65,8 @@ class MutterController extends Controller
     		$em = $this->getDoctrine()->getEntityManager();
     		$mutter = new Mutter();
     		$mutter->setName($request['name']);
+    		$mutter->setDateActive(new \DateTime(date('Y-m-d H:i',strtotime($request['from']))));
+    		$mutter->setDateEnd(new \DateTime(date('Y-m-d H:i',strtotime($request['until']))));
     		$mutter->setOwner($this->getUser());
     		$mutter->setDateActive(new \DateTime());
 

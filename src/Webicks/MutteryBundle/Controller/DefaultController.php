@@ -41,9 +41,9 @@ class DefaultController extends Controller
     			$myFriends = $myFriends['data'];
     			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     		}
-    		$em = $this->getDoctrine()->getEntityManager();    		
-    		
-    		$mutters = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveMutters($user);    		
+    		$em = $this->getDoctrine()->getEntityManager();
+
+    		$mutters = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveMutters($user);
     		$invites = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveInvites($user->getFacebookId());
 
     		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
