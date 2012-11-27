@@ -16,9 +16,8 @@ class FacebookProvider implements UserProviderInterface
     protected $facebook;
     protected $userManager;
     protected $validator;
-    protected $cache;
 
-    public function __construct(BaseFacebook $facebook, $userManager, $validator, $cache)
+    public function __construct(BaseFacebook $facebook, $userManager, $validator)
     {
         $this->facebook = $facebook;
         $this->userManager = $userManager;
@@ -38,17 +37,12 @@ class FacebookProvider implements UserProviderInterface
 
     public function loadUserByUsername($username)
     {
-    	if ($fbdata = $this->cache->get('fbu_'.$username)) {
-    		$fbdata = json_decode($fbdata, true);
-    	} else {
             try {
                 $fbdata = $this->facebook->api('/me');
-                $this->cache->set('fbu_'.$username, json_encode($fbdata), 60);
             } catch (FacebookApiException $e) {
             	throw new UsernameNotFoundException('The user is not authenticated on facebook');
                 $fbdata = null;
             }
-    	}
 
         $user = $this->findUserByFbId($username);
 

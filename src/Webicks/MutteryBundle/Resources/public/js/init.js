@@ -28,10 +28,10 @@ $(document).ready(function() {
 			
 			FB.Event.subscribe('auth.logout', function(response) {
 				window.location.href = "/";
-			});			
+			});
 		}
 	});
-	
+
 	$("#close-mutter").click(function() {
 		$("#create-mutter").dialog('close');
 	});
@@ -69,6 +69,10 @@ $(document).ready(function() {
 		$("#create-mutter").dialog('close');
 		
 		FB.getLoginStatus(function(response){
+			if(!response.authResponse) {
+				return false;
+			}
+
 			FB.ui({
 				method: 'apprequests',
 				display: "iframe",
