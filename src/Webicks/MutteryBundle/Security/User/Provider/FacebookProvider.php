@@ -22,7 +22,6 @@ class FacebookProvider implements UserProviderInterface
         $this->facebook = $facebook;
         $this->userManager = $userManager;
         $this->validator = $validator;
-        $this->cache = $cache;
     }
 
     public function supportsClass($class)
