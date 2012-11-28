@@ -21,6 +21,8 @@ class DefaultController extends Controller
     	$user = false;
     	$multiple = 0;
 
+    	$yt = $this->get('youtube');
+
     	$logger = $this->get('logger');
 
     	$user = $this->getUser();

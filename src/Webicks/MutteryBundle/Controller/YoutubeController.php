@@ -17,65 +17,80 @@ class YoutubeController extends Controller
 	 */
 	public function initAction()
 	{
-		if($authToken = $this->get('session')->get('sessionToken')) {
+		$yt = $this->get('youtube');
+
+		if($yt->isAuthenticated()) {
 			//Already authenticated... show the upload form.
 			return array('loggedIn'=>true);
 		}
 
-		$upload = $this->generateUrl('videoUpload');
-
-		$iframe= $this->generateUrl('iframeEscape',
-				array('js'=>base64_encode("
-						opener.window.$(opener.window.document).trigger('YTLoggedin');
-						window.close();
-						"))
+		return array(
+				'dest'=>$yt->getAuthenticationUrl($this->generateUrl('iframeEscape')),
+				'loggedIn'=>false
 				);
-
-		$iframeDest = $this->getYTAuthUrl($iframe);
-
-		return array('dest'=>$iframeDest,'loggedIn'=>false);
 	}
 
 
 	/**
 	 * Get out of the iframe
 	 *
-	 * @Route("/YTIframeEscape/{js}/", name="iframeEscape")
+	 * @Route("/YTIframeEscape/", name="iframeEscape")
 	 */
 	public function iframeEscapeAction($js)
 	{
 		$js = base64_decode($js);
 
 		$res = new response();
-		$res->setContent("
-				<html>
-				<head>
-				<script type='text/javascript'>
-				".$js."
-				</script>
-				</head>
-				<body>
-				</body>
-				</html>
-				");
+		$res->setContent("<html><head><script type='text/javascript'>opener.window.$(opener.window.document).trigger('YTLoggedin');window.close();</script></head><body></body></html>");
 		return $res;
 	}
 
 	/**
-	 * Display upload form
+	 * Generate temporary video entry for upload and display upload form
 	 *
 	 * @Route("/ytUpload", name="videoUpload")
 	 * @Template()
 	 */
 	public function uploadAction()
 	{
-		$uploadToken = $this->createVideoEntry();
+		$vEntry = new \Zend_Gdata_YouTube_VideoEntry();
+
+		$vEntry->setVideoTitle('Temporary Muttery video');
+		$vEntry->setVideoCategory('People');
+		$vEntry->setVideoDescription('');
+
+		// Set unlisted
+		$unlisted = new \Zend_Gdata_App_Extension_Element( 'yt:accessControl', 'yt',
+				'http://gdata.youtube.com/schemas/2007', '' );
+		$unlisted->setExtensionAttributes(array(
+				array('namespaceUri' => '', 'name' => 'action', 'value' => 'list'),
+				array('namespaceUri' => '', 'name' => 'permission', 'value' => 'denied')
+		));
+		$vEntry->setExtensionElements(array($unlisted));
+
+		try {
+    		$yt = $this->get('youtube')->getClient();
+    		$uploadToken = $yt->getFormUploadToken($vEntry);
+		} catch(\Exception $e) {
+			//@todo: Manage exception here so that we don't upload bogus files...
+			throw $e;
+		}
 
 		return array(
-				'nextUrl'=>'http://muttery.rares.webicks.com/',
+				'nextUrl'=>'http://muttery.rares.webicks.com/'.$this->generateUrl('youtubeFinalize'),
 				'postUrl'=>$uploadToken['url'],
 				'tokenValue'=>$uploadToken['token']
 				);
+	}
+
+	/**
+	 * @Route("/ytComplete", name="youtubeFinalize")
+	 * @Template()
+	 */
+	public function ytFinalizeAction()
+	{
+		$yt = $this->get('youtube')->getClient();
+		return array();
 	}
 
 	/**
@@ -87,70 +102,14 @@ class YoutubeController extends Controller
 	public function processAuthorizationTokenAction($destination)
 	{
 		$token = $this->getRequest()->get('token');
+		$redirect = base64_decode($destination);
 
-		var_dump($token);
-
-		$session = $this->get('session');
-		$redirectDestination = base64_decode($destination);
-		var_dump($redirectDestination);
-
-		if(!$token) {
-			$redirectDestination = $this->getYTAuthUrl($redirectDestination);
-		} elseif(!$session->get('sessionToken')) {
-			$sessionToken = \Zend_Gdata_AuthSub::getAuthSubSessionToken($token);
-			$session->set('sessionToken', $sessionToken);
+		$yt = $this->get('youtube');
+		if(!$yt->processSingleToken($token)) {
+    		$redirect = $yt->getAuthenticationUrl($redirect);
 		}
 
-		return $this->redirect($redirectDestination);
-	}
-
-	public function createVideoEntry()
-	{
-		$sessionToken = $this->get('session')->get('sessionToken');
-
-		if(!$sessionToken) {
-			return false;
-		}
-
-		$httpClient = \Zend_Gdata_AuthSub::getHttpClient($sessionToken);
-
-		$yt = new \Zend_Gdata_YouTube($httpClient, 'Muttery', null, 'AI39si7kawwsk2nlwc3ZF52kASmkTJLP16XISgVayh6lwI-tlJA_leickIE-ujf8ggjB4xFl3C48ERvOelsXav5XmHyaiGM5gg');
-		$yt->setMajorProtocolVersion(2);
-		$yt->setGzipEnabled(true);
-
-		$vEntry = new \Zend_Gdata_YouTube_VideoEntry();
-
-		$vEntry->setVideoTitle('Test upload vid');
-		$vEntry->setVideoCategory('People');
-		$vEntry->setVideoDescription('My test vid upload');
-
-		// Set unlisted
-		$unlisted = new \Zend_Gdata_App_Extension_Element( 'yt:accessControl', 'yt',
-				'http://gdata.youtube.com/schemas/2007', '' );
-		$unlisted->setExtensionAttributes(array(
-				array('namespaceUri' => '', 'name' => 'action', 'value' => 'list'),
-				array('namespaceUri' => '', 'name' => 'permission', 'value' => 'denied')
-		));
-		$vEntry->setExtensionElements(array($unlisted));
-
-		return $yt->getFormUploadToken($vEntry);
-	}
-
-	/**
-	 * Get youtube authorization request URL
-	 * @return string
-	 * @param string Redirect destination
-	 */
-	public function getYTAuthUrl($redirect = '/')
-	{
-		$destination = 'http://'.$_SERVER['HTTP_HOST'];
-		$destination .= $this->generateUrl('YToken',
-				array('destination'=>base64_encode($redirect))
-				);
-
-		$scope = 'http://gdata.youtube.com';
-
-		return \Zend_Gdata_AuthSub::getAuthSubTokenUri($destination, $scope, false, true);
+		return $this->redirect($redirect);
 	}
 
 }
