@@ -126,6 +126,7 @@ body {
 	display: none;
 }
 
+
 #create-mutter .active {
 	display: block;
 }
@@ -145,6 +146,14 @@ body {
 }
 
 #create-mutter .save-action input {
+}
+
+.create-mutter .start-end-date {
+	display: none;
+}
+
+.create-mutter .start-end-date .active {
+	display: inline;
 }
 
 #container * {
