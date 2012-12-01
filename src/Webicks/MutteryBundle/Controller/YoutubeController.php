@@ -30,7 +30,6 @@ class YoutubeController extends Controller
 				);
 	}
 
-
 	/**
 	 * Get out of the iframe
 	 *
