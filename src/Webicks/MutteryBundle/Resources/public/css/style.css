@@ -63,8 +63,14 @@ body {
 	margin-right: 10px;
 }
 
-.ui-dialog-titlebar {
-	display:none;
+.userbox .picture	{
+	background-color: #F5F5F5;
+	height: 163px;
+}
+
+.userbox .picture img {
+	width: auto;
+	max-height: 163px;
 }
 
 #create-mutter {

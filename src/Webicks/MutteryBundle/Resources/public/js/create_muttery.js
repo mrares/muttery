@@ -4,15 +4,36 @@ $(document).ready(function() {
 	if (! $('#create-mutter')) {
 		return false;
 	}
-	
-	
-	$("#close-mutter").click(function() {
-		$("#create-mutter").dialog('close');
+
+	$('#create-mutter').dialog({
+		 autoOpen: false,
+		 width: 730,
+         modal: true,     
+         title: "Welcome, please create your mutter here!",
 	});
 	
+	$('#select-mutter').dialog({
+		 autoOpen: false,
+		 width: 730,
+		 modal: true,
+		 resizable: false,
+		 title: "You have multiple events active, please choose one!",
+	});
+	
+	if (results > 1)
+	{
+		$("#select-mutter").dialog('open');		
+	}	else if (results == 0)	{
+		$("#create-mutter").dialog('open');
+	}
+		
 	$("#open-new-mutter").click(function() {
 		$("#create-mutter").dialog('open');
 	});
+	
+	$("#open-active-mutter").click(function() {
+		$("#select-mutter").dialog('open');
+	});	
 
 	$('[name="mutter-type"]').change(function(ev){
 		$('.create-action').removeClass('active');
@@ -71,12 +92,6 @@ $(document).ready(function() {
 		});
 		
 	});	
-	
-	$('#create-mutter').dialog({
-		 autoOpen: false,
-		 width: 730,
-         modal: true,
-	});
 	
 	//Toggle Mutter Name in and out of the field, this is sexy!
 	$('#mutter-name').focus(function(self){

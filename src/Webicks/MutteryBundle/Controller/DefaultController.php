@@ -48,6 +48,18 @@ class DefaultController extends Controller
     		$mutters = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveMutters($user);
     		$invites = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveInvites($user->getFacebookId());
 
+    		$results = count($mutters)+count($invites);
+
+    		if ($results==1)
+    		{
+    			if (count($mutters)==0)
+    			{
+    				$id = $invites[0]->getId();
+    			}	else	{
+    				$id = $mutters[0]->getId();
+    			}
+    			return $this->redirect('mutter/'.$id);
+    		}
     		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
     	}
 
@@ -56,6 +68,7 @@ class DefaultController extends Controller
         	'mutters'=>$mutters,
         	'invites'=>$invites,
         	'user'=>$user,
+        	'results'=>$results,
         );
     }
 

@@ -2,6 +2,7 @@
 
 {% block headJS %}
 var MutterActionData = '';
+var results = {{ results }};
 {% endblock %}
 
 {% block header_message %}
@@ -13,12 +14,10 @@ Welcome!
 
 {% if app.user %}
 <a id="open-new-mutter" href="javascript://">Create a new mutter</a>
+<a id="open-active-mutter" href="javascript://">View active mutters</a>
 {# Mutter creation dialog box to be displayed on FB login. #}
 <div id="create-mutter" class="create-mutter">
-	<div class="modal-title">
-		<span id="ov-message">Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!</span>
-	</div>
-    <div class="header">
+ 	<div class="header">
         <div>
         <input type="text" id="mutter-name" value="Mutter Name" rel="Mutter Name" />
         <a href="javascript://" id="add-start-date">Add start date</a><br>
@@ -44,24 +43,22 @@ Welcome!
     </div>
 </div>
 <div id="select-mutter">
-	Welcome {{ user.FirstName}}, you have multiple events active, please choose one!
-	<div>
-		<span class="title">Active Mutters:</span>
-		{% for mutter in mutters %}
-			<div class="muttery">
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">{{ mutter.name }}</a>
-				, created by you.
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">Open</a>
-			</div>
-		{% endfor %}
-		{% for mutter in invites %}
-			<div class="invite">
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">{{ mutter.name }}</a>
-				, in which you was invited by {{ mutter.owner.fullname }}.
-				<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">Open</a>
-			</div>
-		{% endfor %}
-	</div>
+	{% for mutter in mutters %}
+		<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">		
+			<div class="userbox">
+	            <div class="username">{{ mutter.name }}</div>
+	            <div class="picture"><img src="https://graph.facebook.com/{{ mutter.owner.FacebookId }}/picture?type=large" /></div>
+	    	</div>															
+		</a>
+	{% endfor %}
+	{% for mutter in invites %}
+		<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">		
+			<div class="userbox">
+	            <div class="username">{{ mutter.name }}</div>
+	            <div class="picture"><img src="https://graph.facebook.com/{{ mutter.owner.FacebookId }}/picture?type=large" /></div>
+	    	</div>															
+		</a>
+	{% endfor %}	
 </div>
 {% endif %}
 <div class="grid col-540">
