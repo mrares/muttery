@@ -19,7 +19,7 @@ class DefaultController extends Controller
     	$mutters = false;
     	$invites = false;
     	$user = false;
-    	$multiple = 0;
+    	$results = 0;
 
     	$yt = $this->get('youtube');
 
