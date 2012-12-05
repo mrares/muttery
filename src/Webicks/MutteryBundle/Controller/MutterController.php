@@ -86,6 +86,10 @@ class MutterController extends Controller
     		$em->persist($mutter);
     		$em->flush();
 
+    		if($request['type'] == 'youtube') {
+    			$this->postProcessVideo($mutter);
+    		}
+
     		$return = array(
     				"success"=>true,
     				"mutter_id"=>$mutter->getId()
@@ -101,4 +105,13 @@ class MutterController extends Controller
     	$response->setContent(json_encode($return));
     	return $response;
     }
+
+    /**
+     * @param Mutter $mutter
+     */
+    private function postProcessVideo($mutter) {
+    	$md = $mutter->getData();
+    	$data = $md->getData();
+    }
+
 }

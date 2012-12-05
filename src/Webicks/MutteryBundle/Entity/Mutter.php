@@ -231,7 +231,7 @@ class Mutter
     /**
      * Get data
      *
-     * @return string
+     * @return MutterData
      */
 	public function getData() {
 		return $this->data;

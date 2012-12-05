@@ -1,5 +1,8 @@
-<form action="{{ postUrl }}?nexturl={{ nextUrl }}" method="post" enctype="multipart/form-data">
+<form id="ytUploadForm" action="{{ postUrl }}?nexturl={{ nextUrl }}" method="post" enctype="multipart/form-data" target="hiddenRes">
     <input name="file" type="file"/>
     <input name="token" type="hidden" value="{{ tokenValue }}"/>
     <input value="Upload Video File" type="submit" />
 </form>
+<input type="hidden" id="uploadedVid" value="" />
+<iframe id="hiddenRes" name="hiddenRes" style="display: none;">
+</iframe>

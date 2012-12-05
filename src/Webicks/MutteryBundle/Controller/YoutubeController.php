@@ -33,15 +33,16 @@ class YoutubeController extends Controller
 	/**
 	 * Get out of the iframe
 	 *
-	 * @Route("/YTIframeEscape/", name="iframeEscape")
+	 * @Route("/YTIframeEscape", name="iframeEscape")
 	 */
-	public function iframeEscapeAction($js)
+	public function iframeEscapeAction()
 	{
-		$js = base64_decode($js);
-
-		$res = new response();
-		$res->setContent("<html><head><script type='text/javascript'>opener.window.$(opener.window.document).trigger('YTLoggedin');window.close();</script></head><body></body></html>");
-		return $res;
+		return new response("<html><head>
+				<script type='text/javascript'>
+				opener.window.$(opener.window.document).trigger('YTLoggedin');
+				window.close();
+				</script>
+				</head><body></body></html>");
 	}
 
 	/**
@@ -76,20 +77,31 @@ class YoutubeController extends Controller
 		}
 
 		return array(
-				'nextUrl'=>'http://muttery.rares.webicks.com/'.$this->generateUrl('youtubeFinalize'),
+				'nextUrl'=>'http://muttery.rares.webicks.com'.$this->generateUrl('youtubeFinalize'),
 				'postUrl'=>$uploadToken['url'],
 				'tokenValue'=>$uploadToken['token']
 				);
 	}
 
 	/**
-	 * @Route("/ytComplete", name="youtubeFinalize")
+	 * @Route("/ytFinalize", name="youtubeFinalize")
 	 * @Template()
 	 */
 	public function ytFinalizeAction()
 	{
+		$status = $this->getRequest()->get('status');
+		$id = $this->getRequest()->get('id',0);
+		if($status!=200 || !$id) {
+			return array('err'=>'Failed to upload!', 'id'=>false);
+		}
+
 		$yt = $this->get('youtube')->getClient();
-		return array();
+		$vid = $yt->getFullVideoEntry($id);
+		if(!$vid) {
+			return array('err'=>'Failed to fetch video!', 'id'=>false);
+		}
+
+		return array('err'=>false, 'id'=>$id);
 	}
 
 	/**

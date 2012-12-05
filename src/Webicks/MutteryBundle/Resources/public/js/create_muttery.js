@@ -48,7 +48,7 @@ $(document).ready(function() {
 		if (mutterType == "message") {
 			mutterActionData = $('#mutter-data-message').val();
 		} else if (mutterType == "youtube") {
-			mutterActionData = "YOUTUBE";
+			mutterActionData = $('#uploadedVid').val();
 		} else if (mutterType == "redirect") {
 			mutterActionData = $('#mutter-data-redirect').val();
 		}
@@ -149,6 +149,24 @@ $(document).ready(function() {
 			loginWindow = window.open(windowDest, "YTLogin", 'width=500');
 		}
 	});
+	
+	$(document).bind('videoUpload', function(ev, param){
+		$('#ytUploadForm').unmask();
+		console.log(arguments);
+		console.log(param);
+		if(param['error']) {
+			console.log(param['error']);
+			return false;
+		} else {
+			console.log("God id: " + param['id']);
+			$('#uploadedVid').val(param['id']);
+			$('#ytUploadForm').hide();
+		}
+	})
+	
+	$('#ytUploadForm').submit(function(){
+		$('#ytUploadForm').mask('Uploading...');
+	})
 	
 	$(document).bind('YTLoggedin', function(param){
 		$('#createActionYoutube').mask('Loading');
