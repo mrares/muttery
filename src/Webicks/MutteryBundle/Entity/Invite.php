@@ -22,6 +22,13 @@ class Invite
     private $id;
 
     /**
+     * @var integer $mutter_id
+     *
+     * @ORM\Column(name="mutter_id", type="integer")
+     */
+    private $mutter_id;
+
+    /**
      * @var boolean $sent
      *
      * @ORM\Column(name="sent", type="boolean")
@@ -43,10 +50,16 @@ class Invite
     private $destination;
 
     /**
+     * @var string $fb_name
      *
+     * @ORM\Column(name="temp_name", type="string", length=255, nullable=true)
+     */
+    private $fb_name;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Mutter", inversedBy="invites")
      */
-    public $mutter;
+    private $mutter;
 
     /**
      * Get id

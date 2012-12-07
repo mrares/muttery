@@ -9,7 +9,7 @@ umask(0000);
 
 $loader = require_once __DIR__.'/../app/bootstrap.php.cache';
 
-$loader = new ApcClassLoader('wmutt2', $loader);
+$loader = new ApcClassLoader('wmutt2_'.__DIR__, $loader);
 $loader->register(true);
 
 require_once __DIR__.'/../app/AppKernel.php';

@@ -2,95 +2,74 @@
 
 namespace Webicks\MutteryBundle\Controller;
 
-use Webicks\MutteryBundle\Entity\Invite;
-
-use Webicks\MutteryBundle\Entity\Mutter;
-
-use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="HomePage")
      * @Template()
      */
     public function indexAction()
     {
     	$myFriends = false;
+    	$mutters = false;
+    	$invites = false;
+    	$user = false;
+    	$results = 0;
+
+    	$yt = $this->get('youtube');
 
     	$logger = $this->get('logger');
 
-    	if($this->getUser() && $this->getUser()->hasRole('ROLE_FACEBOOK')) {
+    	$user = $this->getUser();
+    	if($user && $user->hasRole('ROLE_FACEBOOK')) {
     		/*
+    		 * Getting memcache service to use the caching layer
     		 * @var Memcached
     		 */
     		$cache = $this->get('cache');
-    		if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
-    			$logger->info("Cache hit: friends");
+
+    		//Getting My Friend list from cache, much faster than getting it from FB
+    		$myFriends = $cache->get($this->getUser()->getFacebookId().'_friends');
+    		if ($myFriends) {
     			$myFriends = json_decode($myFriends);
     		} else {
-    			$logger->info("Cache miss: friends");
     			$FBu = $this->get('facebook');
     			$myFriends = $FBu->api('/me/friends');
     			$myFriends = $myFriends['data'];
     			$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     		}
+    		$em = $this->getDoctrine()->getEntityManager();
+
+    		$mutters = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveMutters($user);
+    		$invites = $em->getRepository('Webicks\MutteryBundle\Entity\Mutter')->getActiveInvites($user->getFacebookId());
+
+    		$results = count($mutters)+count($invites);
+
+    		if ($results==1)
+    		{
+    			if (count($mutters)==0)
+    			{
+    				$id = $invites[0]->getId();
+    			}	else	{
+    				$id = $mutters[0]->getId();
+    			}
+    			return $this->redirect('mutter/'.$id);
+    		}
     		$myFriends = array_slice($myFriends, rand(0,count($myFriends)-9), 9);
     	}
 
-        return array('myFriends'=>$myFriends);
-    }
-
-    /**
-     * @Route("/saveMutter")
-     */
-    public function saveMutterAction() {
-    	$request = $this->getRequest()->get('data');
-    	$return = array();
-
-    	if(empty($request['name'])) {
-    		return new Response();
-    	}
-
-    	try {
-	    	$em = $this->getDoctrine()->getEntityManager();
-        	$mutter = new Mutter();
-        	$mutter->setName($request['name']);
-        	$mutter->setOwner($this->getUser());
-        	$mutter->setDateActive(new \DateTime());
-
-        	$em->persist($mutter);
-        	$em->flush($mutter);
-        	$em->refresh($mutter);
-
-        	foreach($request['invites'] as $invitee) {
-        		$invite = new Invite();
-        		$invite->setDestination($invitee);
-        		$invite->setMutter($mutter);
-
-        		$em->persist($invite);
-        	}
-
-        	$em->flush();
-
-        	$return = array(
-        			"success"=>true,
-        			"mutter_id"=>$mutter->getId()
-        			);
-    	} catch (Exception $e) {
-    		$return = array(
-    				"success"=>false,
-    				"exception"=>true,
-    				"message"=> $e->getMessage());
-    	}
-
-    	$response = new Response();
-    	$response->setContent(json_encode($return));
-    	return $response;
+        return array(
+        	'myFriends'=>$myFriends,
+        	'mutters'=>$mutters,
+        	'invites'=>$invites,
+        	'user'=>$user,
+        	'results'=>$results,
+        );
     }
 
     /**

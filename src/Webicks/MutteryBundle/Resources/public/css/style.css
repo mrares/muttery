@@ -15,7 +15,7 @@ Version: 1.0
 /* =Base
 -------------------------------------------------------------- */
 body {
-    background: #fff url(../images/bg.png) repeat-x;
+    background: #fff url(/bundles/webicksmuttery/images/bg.png) repeat-x;
     color: #222;
     font-size: 15px;
     font-family: 'Muli', Verdana, Helvetica, sans-serif;
@@ -63,10 +63,21 @@ body {
 	margin-right: 10px;
 }
 
+.userbox .picture	{
+	background-color: #F5F5F5;
+	height: 163px;
+}
+
+.userbox .picture img {
+	width: auto;
+	max-height: 163px;
+}
+
 #create-mutter {
 	display:none;
 	width:655px;
     border:10px solid #666;
+    background-color:#fff;
  
     /* for modern browsers use semi-transparent color on the border. nice! */
     border:10px solid rgba(82, 82, 82, 0.698);
@@ -78,8 +89,10 @@ body {
 
 #create-mutter div {
     padding:10px;
+}
+
+#create-mutter div.header {
     border:1px solid #3B5998;
-    background-color:#fff;
     font-family:"lucida grande",tahoma,verdana,arial,sans-serif
 }
 
@@ -88,7 +101,7 @@ body {
 	-webkit-appearance: none;
 	width: 200px;
 	height: 43px;
-	background: #222 url(../images/muttery-type.png) top repeat-x;
+	background: #222 url(/bundles/webicksmuttery/images/muttery-type.png) top repeat-x;
 }
 
 #create-mutter #mutter-type-message {
@@ -115,13 +128,13 @@ body {
 	background-position: -400px -43px;
 }
 
+#create-mutter .create-action {
+	display: none;
+}
+
 
 #create-mutter .active {
 	display: block;
-}
-
-#create-mutter .create-action {
-	display: noen;
 }
 
 #create-mutter .create-message {
@@ -139,6 +152,23 @@ body {
 }
 
 #create-mutter .save-action input {
+}
+
+.create-mutter .start-end-date {
+	display: none;
+}
+
+.create-mutter .start-end-date .active {
+	display: inline;
+}
+
+#mutter_countdown {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 44px;
+	padding-top: 50px;
+	padding-bottom: 0px;
+	font-family: serif;
 }
 
 #container * {
@@ -780,7 +810,7 @@ h6 {
 /* =Footer
 -------------------------------------------------------------- */
 #footer {
-    background: #222 url(../images/bg-footer.png) top repeat-x;
+    background: #222 url(/bundles/webicksmuttery/images/bg-footer.png) top repeat-x;
     color: #666666;
     width: 100%;
     max-width: 100%;
@@ -925,7 +955,7 @@ h6 {
 		-moz-appearance: none !important;
 		-webkit-appearance: none !important;
 		appearance: none !important;
-		background: #fff url(../images/bg-select.png) no-repeat right;
+		background: #fff url(/bundles/webicksmuttery/images/bg-select.png) no-repeat right;
 		border: 1px solid #ccc;
         font-size: 12px;
 		overflow: hidden;
