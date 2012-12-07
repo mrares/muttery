@@ -76,7 +76,7 @@ class Mutter
     private $owner;
 
     /**
-     * @ORM\OneToOne(targetEntity="MutterData", inversedBy="mutter", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="MutterData", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $data = null;
 
