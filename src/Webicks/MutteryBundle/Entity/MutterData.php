@@ -13,6 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class MutterData
 {
 
+	const TYPE_MESSAGE = 'message';
+	const TYPE_YOUTUBE = 'youtube';
+	const TYPE_REDIRECT = 'redirect';
+
 	/**
 	 * Create a MutterData record pre-populated with data
 	 *

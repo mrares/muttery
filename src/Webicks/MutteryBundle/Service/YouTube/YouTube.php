@@ -20,9 +20,20 @@ class YouTube {
 		return ($this->sessionToken != false);
 	}
 
-	public function getClient() {
-		if(!$this->sessionToken) {
+	/**
+	 * Get a Youtube Gdata client
+	 *
+	 * @param bool $authenticated
+	 * @throws \Exception
+	 * @return \Zend_Gdata_YouTube
+	 */
+	public function getClient($authenticated = true) {
+		if($authenticated && !$this->sessionToken) {
 			throw new \Exception("Not authorized");
+		}
+
+		if(!$authenticated) {
+			return new \Zend_Gdata_YouTube();
 		}
 
 		$httpClient = \Zend_Gdata_AuthSub::getHttpClient($this->sessionToken);

@@ -126,4 +126,22 @@ class MutterController extends Controller
     	$yt->updateEntry($videoEntry);
     }
 
+    /**
+     * Execute mutter action
+     *
+     * @Route("/mutterAction/{mutterId}", name="mutterAction")
+     * @template()
+     * @param unknown_type $mutterId
+     */
+    public function showAction($mutterId) {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$mutterId);
+
+    	$yt = $this->get('youtube')->getClient(false);
+    	$video = $yt->getVideoEntry($mutter->getData()->getData());
+    	$videoLink = $video->getFlashPlayerUrl();
+
+    	return array('videoUrl' => $videoLink);
+    }
+
 }
