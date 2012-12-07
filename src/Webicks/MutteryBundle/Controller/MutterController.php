@@ -82,13 +82,13 @@ class MutterController extends Controller
     			$invite->setDestination($invitee);
     			$mutter->setInvite($invite);
     		}
+    		if($request['type'] == 'youtube') {
+    			$this->postProcessVideo($mutter);
+    		}
 
     		$em->persist($mutter);
     		$em->flush();
 
-    		if($request['type'] == 'youtube') {
-    			$this->postProcessVideo($mutter);
-    		}
 
     		$return = array(
     				"success"=>true,
@@ -110,8 +110,15 @@ class MutterController extends Controller
      * @param Mutter $mutter
      */
     private function postProcessVideo($mutter) {
-    	$md = $mutter->getData();
-    	$data = $md->getData();
+    	$videoID = $mutter->getData()->getData();
+    	$yt = $this->get('youtube')->getClient();
+    	$videoEntry = $yt->getFullVideoEntry($videoID);
+    	$videoEntry->setVideoTitle("Muttery: ".$mutter->getName());
+    	$flashPlayer = $videoEntry->getFlashPlayerUrl();
+    	if($flashPlayer) {
+    		$mutter->getData()->setData($flashPlayer);
+    	}
+    	$yt->updateEntry($videoEntry);
     }
 
 }
