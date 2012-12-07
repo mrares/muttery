@@ -23,6 +23,15 @@ class MutterController extends Controller
     {
     	$cache = $this->get('cache');
 
+    	// @todo: we need to assure that the mutter can be seen only by the invited users
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$id);
+
+    	$user = $this->getUser();
+    	if(!$user || !$user->hasRole('ROLE_FACEBOOK')) {
+    		return array('mutter' => $mutter);
+    	}
+
     	//Getting My Friend list from cache, much faster than getting it from FB
     	if ($myFriends = $cache->get($this->getUser()->getFacebookId().'_friends')) {
     		$myFriends = json_decode($myFriends);
@@ -32,12 +41,8 @@ class MutterController extends Controller
     		$myFriends = $myFriends['data'];
     		$cache->set($this->getUser()->getFacebookId().'_friends', json_encode($myFriends), 600);
     	}
-    	$FBu = $this->get('facebook');
-    	$me = $FBu->api('/me');
 
-		// @todo: we need to assure that the mutter can be seen only by the invited users
-    	$em = $this->getDoctrine()->getEntityManager();
-		$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$id);
+    	$me = $this->get('facebook')->api('/me');
 
     	return array(
     		'mutter'=>$mutter,
