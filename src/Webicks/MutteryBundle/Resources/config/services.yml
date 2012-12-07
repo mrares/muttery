@@ -5,5 +5,11 @@ services:
             facebook: "@fos_facebook.api"
             userManager: "@fos_user.user_manager"
             validator: "@validator"
-            cache:    "@cache"
             container: "@service_container"
+    
+    youtube:
+        class: Webicks\MutteryBundle\Service\YouTube\YouTube
+        arguments:
+            session: "@session"
+            router: "@router"
+            developerKey: "%youtube.developerKey%"

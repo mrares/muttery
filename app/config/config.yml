@@ -37,6 +37,8 @@ assetic:
     use_controller: false
     filters:
         cssrewrite: ~
+        yui_js:
+            jar: "%kernel.root_dir%/Resources/java/yuicompressor.jar"
 
 # Doctrine Configuration
 doctrine:

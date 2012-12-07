@@ -1,32 +1,66 @@
 {% extends "WebicksMutteryBundle::responsive.html.twig" %}
 
+{% block headJS %}
+var MutterActionData = '';
+var results = {{ results }};
+{% endblock %}
+
 {% block header_message %}
 Welcome!
 {% endblock %}
 
 {% block body %}
 
-{# Mutter creation overlay box to be displayed on FB login. #}
-<div id="create-mutter">
-    <div>
-        <span id="ov-message">Welcome, please create your mutter here! Or <a id="close-mutter" href="javascript://">close</a>!</span>
+
+{% if app.user %}
+<a id="open-new-mutter" href="javascript://">Create a new mutter</a>
+<a id="open-active-mutter" href="javascript://">View active mutters</a>
+{# Mutter creation dialog box to be displayed on FB login. #}
+<div id="create-mutter" class="create-mutter">
+ 	<div class="header">
         <div>
-        <input type="text" id="mutter-name" value="" />
-        <input type="radio" id="mutter-type-message" name="mutter-type" class="radio-button" checked />
-        <input type="radio" id="mutter-type-youtube" name="mutter-type" class="radio-button"  />
-        <input type="radio" id="mutter-type-redirect" name="mutter-type" class="radio-button"  />
-
+        <input type="text" id="mutter-name" value="Mutter Name" rel="Mutter Name" />
+        <a href="javascript://" id="add-start-date">Add start date</a><br>
+    	<input type="text" id="date-from" class="start-end-date" value="" />
+        <a href="javascript://" id="add-end-date">Add end date</a><br>
+    	<input type="text" id="date-until" class="start-end-date" value="" />
+        <input type="radio" id="mutter-type-message" name="mutter-type" value="message" class="radio-button" checked />
+        <input type="radio" id="mutter-type-youtube" name="mutter-type" value="youtube" class="radio-button"  />
+        <input type="radio" id="mutter-type-redirect" name="mutter-type" value="redirect" class="radio-button"  />
         </div>
-
     </div>
-    <div class="create-action create-message active">
-        <textarea>Your message here!</textarea>
+    <div id="createActionMessage" class="create-action create-message active">
+        <textarea id="mutter-data-message">Your message here!</textarea>
+    </div>
+    <div id="createActionYoutube" class="create-action create-youtube">
+        {% render "WebicksMutteryBundle:Youtube:init" %}
+    </div>
+    <div id="createActionRedirect" class="create-action create-redirect">
+        <input type="text" value="Redirect to URL!" name="mutter-data-redirect" id="mutter-data-redirect" />
     </div>
     <div class="save-action">
-        <input id="invite-friends" type="button" name="send" value="Ok" />
+        <input id="invite-friends" type="button" name="send" value="Invite Friends" />
     </div>
 </div>
-
+<div id="select-mutter">
+	{% for mutter in mutters %}
+		<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">		
+			<div class="userbox">
+	            <div class="username">{{ mutter.name }}</div>
+	            <div class="picture"><img src="https://graph.facebook.com/{{ mutter.owner.FacebookId }}/picture?type=large" /></div>
+	    	</div>															
+		</a>
+	{% endfor %}
+	{% for mutter in invites %}
+		<a href="{{ path('webicks_muttery_mutter_index', { 'id' : mutter.id}) }}">		
+			<div class="userbox">
+	            <div class="username">{{ mutter.name }}</div>
+	            <div class="picture"><img src="https://graph.facebook.com/{{ mutter.owner.FacebookId }}/picture?type=large" /></div>
+	    	</div>															
+		</a>
+	{% endfor %}	
+</div>
+{% endif %}
 <div class="grid col-540">
     <h1>We're waiting for you:</h1>
     <hr />
@@ -39,7 +73,6 @@ Welcome!
     {% endfor %}
     </div>
 </div>
-
 <div class="grid col-380 fit">
     <div id="register-box">
         {% if not app.user %}

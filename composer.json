@@ -2,7 +2,8 @@
     "name": "symfony/framework-standard-edition",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-0": { "": "src/" },
+        "classmap": ["zend/"]
     },
     "require": {
         "php": ">=5.3.3",

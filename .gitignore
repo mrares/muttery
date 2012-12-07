@@ -14,3 +14,5 @@ app/config/parameters.ini
 .buildpath
 .project
 /.travis.yml
+/composer.lock
+/composer.phar
