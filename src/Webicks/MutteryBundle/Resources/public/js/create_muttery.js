@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	//Do not run this unless there is a create-mutter box
-	if (! $('#create-mutter')) {
+	if (! $('#create-mutter').length) {
 		return false;
 	}
 
