@@ -137,11 +137,21 @@ class MutterController extends Controller
     	$em = $this->getDoctrine()->getEntityManager();
     	$mutter = $em->find('\Webicks\MutteryBundle\Entity\Mutter',$mutterId);
 
-    	$yt = $this->get('youtube')->getClient(false);
-    	$video = $yt->getVideoEntry($mutter->getData()->getData());
-    	$videoLink = $video->getFlashPlayerUrl();
+    	if($mutter->getDateActive() > new \DateTime()) {
+    		return $this->redirect('/');
+    	}
 
-    	return array('videoUrl' => $videoLink);
+    	$mutterData = $mutter->getData();
+    	$type = $mutterData->getType();
+    	$data = $mutterData->getData();
+
+    	if($type == MutterData::TYPE_YOUTUBE) {
+        	$yt = $this->get('youtube')->getClient(false);
+        	$video = $yt->getVideoEntry($mutter->getData()->getData());
+        	$data = $video->getFlashPlayerUrl();
+    	}
+
+    	return array( 'type'=>$type, 'data' => $data);
     }
 
 }

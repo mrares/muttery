@@ -1,1 +1,9 @@
-<iframe width="560" height="315" src="{{ videoUrl }}&autoplay=1" frameborder="0" allowfullscreen></iframe>
+{% if type=='youtube' %}
+<iframe width="560" height="315" src="{{ data }}&autoplay=1" frameborder="0" allowfullscreen></iframe>
+{% elseif type=='message' %}
+<div>{{ data }}</div>
+{% else %}
+<script type="application/javascript">
+window.location = "{{ data }}"
+</script>
+{% endif %}

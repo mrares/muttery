@@ -32,7 +32,8 @@ $(document).ready(function() {
 			if (diff == 0) {
 				clearInterval(interval);
 				$('#mutter_countdown').dialog('close');
-				$('#mutter_action').load('/mutterAction/' + currentMutter.id, function(){
+				$('#mutter_action').load('/mutterAction/' + currentMutter.id, 
+				function(){
 					console.log('done');
 				});
 				$('#mutter_action').dialog({
