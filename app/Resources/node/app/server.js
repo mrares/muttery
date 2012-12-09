@@ -1,4 +1,3 @@
-
 var DEBUG = true
 var PORT = 8080
 var INIT_MESSAGES = 5

@@ -38,10 +38,12 @@
 		'@WebicksMutteryBundle/Resources/public/js/init.js'
 		'@WebicksMutteryBundle/Resources/public/js/active_muttery.js'
 		'@WebicksMutteryBundle/Resources/public/js/create_muttery.js'
+		'@WebicksMutteryBundle/Resources/public/js/chat_muttery.js'
 
 		output='js/compiled/main.js'
 	%}
 		<script type="text/javascript" src="{{ asset_url }}" ></script>
+		<script src="http://muttery.marius.webicks.com:8080/socket.io/socket.io.js"></script>
 	{% endjavascripts %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
