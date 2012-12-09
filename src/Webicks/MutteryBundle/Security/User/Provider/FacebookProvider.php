@@ -42,7 +42,7 @@ class FacebookProvider implements UserProviderInterface
         //@todo: check for eventual bugs...
         if($user) {
             $fbsData = $this->facebook->getSignedRequest();
-            if(array_key_exists('issued_at', $fbsData) && (time() - $fbsData['issued_at'] < 300)) {
+            if($fbsData && (time() - $fbsData['issued_at'] < 300)) {
             	return $user;
             }
         }
