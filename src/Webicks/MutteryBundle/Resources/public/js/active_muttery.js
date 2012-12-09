@@ -3,10 +3,15 @@ $(document).ready(function() {
 		return false;
 	}
 	
+	$('#chat').load('/chat', function () {
+		console.log('chat loaded');
+	});		
+	
 	if(currentMutter.startTime.getTime() < (new Date()).getTime()){
 		$('#mutter_action').load('/mutterAction/' + currentMutter.id, function(){
 			console.log('done');
 		});
+		
 		$('#mutter_action').dialog({
 			 autoOpen: true,
 			 width: 850,
@@ -18,11 +23,18 @@ $(document).ready(function() {
 			});
 	} else {
 		$('#mutter_countdown').dialog({
-			 autoOpen: true,
-			 width: 850,
+			 autoOpen: false,			 
+			 width: 700,
 	         modal: true,     
-	         title: "Countdown!",
-		}, function(){console.log('dialog opened');});
+	         draggable: false,
+	         closeOnEscape: false,
+	         resizable: false,	         	 
+	         position: "top",
+	         dialogClass: "counting",
+		});
+        
+		$('.counting div.ui-dialog-titlebar').remove();
+		$('#mutter_countdown').dialog('open');
 		
 		console.log(currentMutter);
 		
@@ -55,5 +67,12 @@ $(document).ready(function() {
 			text += ((diff%60) >= 0) ? (diff%60) + ' seconds.' : '';
 			$('#mutter_countdown').text(text);
 		}, 1000);
+		
+		
+        // Resize the dialog
+        $(window).resize(function(){	       
+        	var width = parseInt($(window).width());        	
+        	$("#mutter_countdown").dialog('option', 'width', width-200).dialog('option','position','top');            
+        });
 	}
 });

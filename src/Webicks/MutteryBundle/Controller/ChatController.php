@@ -9,15 +9,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChatController extends Controller
 {
-
 	/**
 	 * Initialize chat
-     * @Route("/chat", name="initChat")
-     * @Template()
+	 * @Route("/chat", name="initChat")
+	 * @Template()
 	 */
-	public function initAction()
+	public function chatAction()
 	{
-
+		return array(
+		);
 	}
-
 }
