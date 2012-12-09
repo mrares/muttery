@@ -35,6 +35,9 @@
 		'@WebicksJqueryBundle/Resources/public/jquery.loadmask.js'
 		'@WebicksJqueryBundle/Resources/public/jquery-ui-1.9.2.custom.min.js'
 		'@WebicksJqueryBundle/Resources/public/jquery-ui-timepicker-addon.js'
+
+		'../app/Resources/node/lib/socket.io/node_modules/socket.io-client/dist/socket.io.js'
+
 		'@WebicksMutteryBundle/Resources/public/js/init.js'
 		'@WebicksMutteryBundle/Resources/public/js/active_muttery.js'
 		'@WebicksMutteryBundle/Resources/public/js/create_muttery.js'
@@ -42,9 +45,8 @@
 
 		output='js/compiled/main.js'
 	%}
-		<script type="text/javascript" src="{{ asset_url }}" ></script>		
+		<script type="text/javascript" src="{{ asset_url }}" ></script>
 	{% endjavascripts %}
-	<script src="http://muttery.marius.webicks.com:8080/socket.io/socket.io.js"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body class="page page-id-1484 page-template page-template-responsive-theme-php">
