@@ -82,6 +82,26 @@ class DefaultController extends Controller
     	if(!empty($fbdata)) {
         	$this->get('facebook.user')->loadUserByUsername($fbdata['id']);
     	}
-    	return $this->redirect('/');
+
+    	//On login, authenticate the user to use the chat
+    	$chat = $this->get('chat');
+    	$user = $this->getUser();
+    	$chat->pushLogin(
+    			array(
+    					'id' =>intval($user->getUsername()),
+    					'full_name'=>$user->getFullName(),
+    					'first_name'=>$this->getUser()->getFirstName(),
+    					'accessToken'=>$fb->getAccessToken()
+    					)
+    			);
+
+    }
+
+    /**
+     * @Route("/test")
+     */
+    public function testAction()
+    {
+    	return new Response();
     }
 }

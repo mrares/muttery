@@ -13,3 +13,8 @@ services:
             session: "@session"
             router: "@router"
             developerKey: "%youtube.developerKey%"
+    chat:
+        class: Webicks\MutteryBundle\Service\Chat\ChatAdmin
+        arguments:
+            session: "@session"
+            router: "@router"        

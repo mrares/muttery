@@ -41,8 +41,8 @@ Welcome!
 	<p class="chat-title" onclick="javascript: toggleChat();">Real Time Chat</p>
     <div id="msgs"></div>
     <div id="form">
-        <form id="chat" onsubmit="sendMsg(); return false;">                
-            <input id="msg" type="text" autocomplete="off" name="message"/><br/>
+        <form id="chatForm" onsubmit="return false;" action="javascript://">
+            <input id="chatMsg" type="text" autocomplete="off" name="message"/><br/>
             <input type="submit" />
         </form>
     </div>
