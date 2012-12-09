@@ -36,14 +36,22 @@ class FacebookProvider implements UserProviderInterface
 
     public function loadUserByUsername($username)
     {
-            try {
-                $fbdata = $this->facebook->api('/me');
-            } catch (FacebookApiException $e) {
-            	throw new UsernameNotFoundException('The user is not authenticated on facebook');
-                $fbdata = null;
-            }
-
         $user = $this->findUserByFbId($username);
+
+        //Temporary defer re-initialization of FBData (refreshing key)
+        //@todo: check for eventual bugs...
+        if($user) {
+            $fbsData = $this->facebook->getSignedRequest();
+            if(array_key_exists('issued_at', $fbsData) && (time() - $fbsData['issued_at'] < 300)) {
+            	return $user;
+            }
+        }
+
+        try {
+            $fbdata = $this->facebook->api('/me');
+        } catch (FacebookApiException $e) {
+        	throw new UsernameNotFoundException('The user is not authenticated on facebook');
+        }
 
         if (!empty($fbdata)) {
             if (empty($user)) {
