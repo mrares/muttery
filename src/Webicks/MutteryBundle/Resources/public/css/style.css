@@ -165,7 +165,7 @@ body {
 #mutter_countdown {
 	text-align: center;
 	vertical-align: middle;
-	font-size: 38px;
+	font-size: 34px;
 	padding-top: 50px;
 	padding-bottom: 0px;
 	font-family: serif;
@@ -1102,7 +1102,10 @@ h6 {
 {
 	margin-top: 100px;
 	margin-left: 0 auto;
-	margin-right: 0 auto;	
+	margin-right: 0 auto;
+	background: #000000 50% 50% repeat-x; 
+	opacity: .7;
+	filter:Alpha(Opacity=30);
 }
 
 /*The last 29 days of the month are the hardest."- Nikola Tesla*/
