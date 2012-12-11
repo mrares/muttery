@@ -5,7 +5,6 @@ var INIT_MESSAGES = 5;
 
 var http = require('http');
 var url = require('url');
-var io = require('../lib/socket.io').listen(server);
 io.set ('transports', ['websocket', 'xhr-polling', 'jsonp-polling']);
 
 var authorizedClients = {};
@@ -37,8 +36,8 @@ var adminServer = http.createServer(function(req,res){
 	
 }).listen(adminPORT);
 
-var server = http.createServer();
-server.listen(PORT);
+var server = http.createServer().listen(PORT);
+var io = require('../lib/socket.io').listen(server);
 
 var messages = new Array();
 
