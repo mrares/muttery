@@ -6,11 +6,11 @@ var INIT_MESSAGES = 5;
 var http = require('http');
 var url = require('url');
 
-
 var authorizedClients = {};
 
 var adminServer = http.createServer(function(req,res){
 	req.setEncoding('utf8');
+	myUrl = url.parse(req.url).path;
 
 	//Get the body
 	var body = '';
@@ -18,22 +18,41 @@ var adminServer = http.createServer(function(req,res){
 		body += chunk;
 	});
 	
-	//Finish processing request
+	var handlers = {
+			'/test': function(req, data, res) {
+				return "test";
+			},
+			'/push': function(req, data, res) {
+				var data = JSON.parse(data);
+
+				if(authorizedClients[data.id] == undefined) {
+					authorizedClients[data.id] = {}
+				}
+
+				authorizedClients[data.id] = data;
+				console.log("Authorization completed");
+				return 'OK!'
+			}
+	}
+
 	req.on('end', function(){
-		data = JSON.parse(body);
-		console.log("Authorization completed");
-		console.log(data);
-		
-		if(authorizedClients[data.id] == undefined) {
-			authorizedClients[data.id] = {}
+		if (!(myUrl in handlers)) {
+			res.writeHead(404, {'Content-Type': 'text/plain'});
+			res.end('Action not found!');
 		}
-		
-		authorizedClients[data.id] = data;
-		
-		res.writeHead(200, {'Content-Type': 'text/plain'});
-		res.end('OK!\n');
+
+		try {
+			var ret = handlers[myUrl](req, body, res);
+			if (ret){
+				res.writeHead(200, {'Content-Type': 'text/plain'});
+				res.end(ret);
+			}
+		} catch (e) {
+			// TODO: handle exception
+			res.writeHead(500, {'Content-Type': 'text/plain'});
+			res.end(JSON.stringify(e));
+		}
 	});
-	
 }).listen(adminPORT);
 
 var server = http.createServer().listen(PORT);
